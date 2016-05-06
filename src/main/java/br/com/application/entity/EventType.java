@@ -4,83 +4,75 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EventType")
 public class EventType {
-	
-	@Id
+
+    @Id
     @GeneratedValue
-	private Integer id;
-	
-	@Column(name = "category")
-	private String category;
-	
-	@Column(name = "id_statustype")
-	private Integer idStatusType;
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "category")
+    private String category;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_statustype")
+    private StatusType statusType;
 
-	public String getCategory() {
-		return category;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getIdStatusType() {
-		return idStatusType;
-	}
+    public String getCategory() {
+        return category;
+    }
 
-	public void setIdStatusType(Integer idStatusType) {
-		this.idStatusType = idStatusType;
-	}
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((idStatusType == null) ? 0 : idStatusType.hashCode());
-		return result;
-	}
+    public StatusType getStatusType() {
+        return statusType;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EventType other = (EventType) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (idStatusType == null) {
-			if (other.idStatusType != null)
-				return false;
-		} else if (!idStatusType.equals(other.idStatusType))
-			return false;
-		return true;
-	}
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((category == null) ? 0 : category.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((statusType == null) ? 0 : statusType.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        EventType other = (EventType) obj;
+        if (category == null) {
+            if (other.category != null) return false;
+        } else if (!category.equals(other.category)) return false;
+        if (id == null) {
+            if (other.id != null) return false;
+        } else if (!id.equals(other.id)) return false;
+        if (statusType == null) {
+            if (other.statusType != null) return false;
+        } else if (!statusType.equals(other.statusType)) return false;
+        return true;
+    }
 
 }

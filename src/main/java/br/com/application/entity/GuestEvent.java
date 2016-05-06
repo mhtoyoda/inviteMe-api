@@ -6,136 +6,120 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "shops")
 public class GuestEvent {
-	
-	@Id
+
+    @Id
     @GeneratedValue
-	private Integer id;
-	
-	@Column(name = "id_event")
-	private Integer idEvent;
-	
-	@Column(name = "id_user")
-	private Integer idUser;
-	
-	@Column(name = "attendance_confirmed")
-	private Boolean attendanceConfirmed;
-	
-	@Column(name = "time_sent_token")
-	private Date timeSentToken;
-	
-	@Column(name = "token")
-	private String token;
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_event")
+    private Event event;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private Users user;
 
-	public Integer getIdEvent() {
-		return idEvent;
-	}
+    @Column(name = "attendance_confirmed")
+    private Boolean attendanceConfirmed;
 
-	public void setIdEvent(Integer idEvent) {
-		this.idEvent = idEvent;
-	}
+    @Column(name = "time_sent_token")
+    private Date timeSentToken;
 
-	public Integer getIdUser() {
-		return idUser;
-	}
+    @Column(name = "token")
+    private String token;
 
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Boolean getAttendanceConfirmed() {
-		return attendanceConfirmed;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setAttendanceConfirmed(Boolean attendanceConfirmed) {
-		this.attendanceConfirmed = attendanceConfirmed;
-	}
+    public Event getEvent() {
+        return event;
+    }
 
-	public Date getTimeSentToken() {
-		return timeSentToken;
-	}
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
-	public void setTimeSentToken(Date timeSentToken) {
-		this.timeSentToken = timeSentToken;
-	}
+    public Users getUser() {
+        return user;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public Boolean getAttendanceConfirmed() {
+        return attendanceConfirmed;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((attendanceConfirmed == null) ? 0 : attendanceConfirmed
-						.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idEvent == null) ? 0 : idEvent.hashCode());
-		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
-		result = prime * result
-				+ ((timeSentToken == null) ? 0 : timeSentToken.hashCode());
-		result = prime * result + ((token == null) ? 0 : token.hashCode());
-		return result;
-	}
+    public void setAttendanceConfirmed(Boolean attendanceConfirmed) {
+        this.attendanceConfirmed = attendanceConfirmed;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GuestEvent other = (GuestEvent) obj;
-		if (attendanceConfirmed == null) {
-			if (other.attendanceConfirmed != null)
-				return false;
-		} else if (!attendanceConfirmed.equals(other.attendanceConfirmed))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (idEvent == null) {
-			if (other.idEvent != null)
-				return false;
-		} else if (!idEvent.equals(other.idEvent))
-			return false;
-		if (idUser == null) {
-			if (other.idUser != null)
-				return false;
-		} else if (!idUser.equals(other.idUser))
-			return false;
-		if (timeSentToken == null) {
-			if (other.timeSentToken != null)
-				return false;
-		} else if (!timeSentToken.equals(other.timeSentToken))
-			return false;
-		if (token == null) {
-			if (other.token != null)
-				return false;
-		} else if (!token.equals(other.token))
-			return false;
-		return true;
-	}
+    public Date getTimeSentToken() {
+        return timeSentToken;
+    }
 
+    public void setTimeSentToken(Date timeSentToken) {
+        this.timeSentToken = timeSentToken;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((attendanceConfirmed == null) ? 0 : attendanceConfirmed.hashCode());
+        result = prime * result + ((event == null) ? 0 : event.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((timeSentToken == null) ? 0 : timeSentToken.hashCode());
+        result = prime * result + ((token == null) ? 0 : token.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        GuestEvent other = (GuestEvent) obj;
+        if (attendanceConfirmed == null) {
+            if (other.attendanceConfirmed != null) return false;
+        } else if (!attendanceConfirmed.equals(other.attendanceConfirmed)) return false;
+        if (event == null) {
+            if (other.event != null) return false;
+        } else if (!event.equals(other.event)) return false;
+        if (id == null) {
+            if (other.id != null) return false;
+        } else if (!id.equals(other.id)) return false;
+        if (timeSentToken == null) {
+            if (other.timeSentToken != null) return false;
+        } else if (!timeSentToken.equals(other.timeSentToken)) return false;
+        if (token == null) {
+            if (other.token != null) return false;
+        } else if (!token.equals(other.token)) return false;
+        if (user == null) {
+            if (other.user != null) return false;
+        } else if (!user.equals(other.user)) return false;
+        return true;
+    }
 }

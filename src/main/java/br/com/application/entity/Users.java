@@ -6,167 +6,148 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
 public class Users {
-	
-	@Id
+
+    @Id
     @GeneratedValue
-	private Integer id;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "lastName")
-	private String lastName;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "gender")
-	private char gender;
-	
-	@Column(name = "password")
-	private String password;
-	
-	@Column(name = "id_statustype")
-	private Integer idStatusType;
-	
-	@Column(name = "date_updated")
-	private Date dateUpdated;
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "name")
+    private String name;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "lastName")
+    private String lastName;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "email")
+    private String email;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "gender")
+    private char gender;
 
-	public String getLastName() {
-		return lastName;
-	}
+    @Column(name = "password")
+    private String password;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_statustype")
+    private StatusType statusType;
 
-	public String getEmail() {
-		return email;
-	}
+    @Column(name = "date_updated")
+    private Date dateUpdated;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public char getGender() {
-		return gender;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public Integer getIdStatusType() {
-		return idStatusType;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setIdStatusType(Integer idStatusType) {
-		this.idStatusType = idStatusType;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Date getDateUpdated() {
-		return dateUpdated;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setDateUpdated(Date dateUpdated) {
-		this.dateUpdated = dateUpdated;
-	}
+    public char getGender() {
+        return gender;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + gender;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((idStatusType == null) ? 0 : idStatusType.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		return result;
-	}
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Users other = (Users) obj;
-		if (dateUpdated == null) {
-			if (other.dateUpdated != null)
-				return false;
-		} else if (!dateUpdated.equals(other.dateUpdated))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (gender != other.gender)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (idStatusType == null) {
-			if (other.idStatusType != null)
-				return false;
-		} else if (!idStatusType.equals(other.idStatusType))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
+    }
+
+    public Date getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + gender;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((statusType == null) ? 0 : statusType.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Users other = (Users) obj;
+        if (dateUpdated == null) {
+            if (other.dateUpdated != null) return false;
+        } else if (!dateUpdated.equals(other.dateUpdated)) return false;
+        if (email == null) {
+            if (other.email != null) return false;
+        } else if (!email.equals(other.email)) return false;
+        if (gender != other.gender) return false;
+        if (id == null) {
+            if (other.id != null) return false;
+        } else if (!id.equals(other.id)) return false;
+        if (lastName == null) {
+            if (other.lastName != null) return false;
+        } else if (!lastName.equals(other.lastName)) return false;
+        if (name == null) {
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
+        if (password == null) {
+            if (other.password != null) return false;
+        } else if (!password.equals(other.password)) return false;
+        if (statusType == null) {
+            if (other.statusType != null) return false;
+        } else if (!statusType.equals(other.statusType)) return false;
+        return true;
+    }
 
 }
