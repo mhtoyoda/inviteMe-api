@@ -108,4 +108,10 @@ public class UserSocialType {
         } else if (!user.equals(other.user)) return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "UserSocialType [id=" + id + ", user=" + user + ", socialType=" + socialType + ", status=" + status + ", dateUpdated=" + dateUpdated
+                        + "]";
+    }
 }

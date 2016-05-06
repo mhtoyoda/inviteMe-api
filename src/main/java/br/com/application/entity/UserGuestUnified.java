@@ -90,4 +90,9 @@ public class UserGuestUnified {
         } else if (!user.equals(other.user)) return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "UserGuestUnified [id=" + id + ", user=" + user + ", event=" + event + ", amount=" + amount + "]";
+    }
 }

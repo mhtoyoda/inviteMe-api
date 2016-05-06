@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
   `lastName` VARCHAR(60) NOT NULL,
+  `phoneNumber` VARCHAR(60) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   `gender` CHAR(1) NOT NULL,
   `password` VARCHAR(100) NOT NULL,

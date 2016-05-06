@@ -75,4 +75,9 @@ public class EventType {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "EventType [id=" + id + ", category=" + category + ", statusType=" + statusType + "]";
+    }
+
 }

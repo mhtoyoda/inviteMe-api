@@ -180,5 +180,11 @@ public class AddressEvent {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "AddressEvent [id=" + id + ", placeName=" + placeName + ", streetName=" + streetName + ", number=" + number + ", complement="
+                        + complement + ", zipCode=" + zipCode + ", cityName=" + cityName + ", longitude=" + longitude + ", latitude=" + latitude
+                        + ", state=" + state + "]";
+    }
 
 }

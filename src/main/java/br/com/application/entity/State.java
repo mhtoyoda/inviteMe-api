@@ -82,4 +82,8 @@ public class State {
 		return true;
 	}
 
+    @Override
+    public String toString() {
+        return "State [id=" + id + ", stateName=" + stateName + ", country=" + country + "]";
+    }
 }

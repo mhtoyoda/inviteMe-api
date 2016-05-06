@@ -216,4 +216,10 @@ public class Event {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Event [id=" + id + ", owner=" + owner + ", eventTypeAccess=" + eventTypeAccess + ", eventType=" + eventType + ", title=" + title
+                        + ", description=" + description + ", eventDate=" + eventDate + ", eventInitHour=" + eventInitHour + ", eventEndHour="
+                        + eventEndHour + ", limitGuests=" + limitGuests + ", addressEvent=" + addressEvent + ", statusType=" + statusType + "]";
+    }
 }

@@ -24,6 +24,9 @@ public class Users {
     @Column(name = "lastName")
     private String lastName;
 
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
     @Column(name = "email")
     private String email;
 
@@ -62,6 +65,14 @@ public class Users {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -115,6 +126,7 @@ public class Users {
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
         result = prime * result + ((statusType == null) ? 0 : statusType.hashCode());
         return result;
     }
@@ -144,10 +156,19 @@ public class Users {
         if (password == null) {
             if (other.password != null) return false;
         } else if (!password.equals(other.password)) return false;
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null) return false;
+        } else if (!phoneNumber.equals(other.phoneNumber)) return false;
         if (statusType == null) {
             if (other.statusType != null) return false;
         } else if (!statusType.equals(other.statusType)) return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Users [id=" + id + ", name=" + name + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", gender="
+                        + gender + ", password=" + password + ", statusType=" + statusType + ", dateUpdated=" + dateUpdated + "]";
     }
 
 }

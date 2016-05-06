@@ -122,4 +122,10 @@ public class GuestEvent {
         } else if (!user.equals(other.user)) return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "GuestEvent [id=" + id + ", event=" + event + ", user=" + user + ", attendanceConfirmed=" + attendanceConfirmed + ", timeSentToken="
+                        + timeSentToken + ", token=" + token + "]";
+    }
 }
