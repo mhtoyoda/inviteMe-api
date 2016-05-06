@@ -2,18 +2,51 @@ package br.com.application.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Event")
 public class Event {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+    @Column(name = "id_owner")
 	private Integer idOwner;
+    
+    @Column(name = "id_eventtype_access")
 	private Integer idEventTypeAccess;
+    
+    @Column(name = "id_eventtype")
 	private Integer idEventType;
+    
+    @Column(name = "title")
 	private String title;
+    
+    @Column(name = "description")
 	private String description;
+    
+    @Column(name = "eventdate")
 	private Date eventDate;
+    
+    @Column(name = "event_init_hour")
 	private Date eventInitHour;
+    
+    @Column(name = "event_end_hour")
 	private Date eventEndHour;
+    
+    @Column(name = "limit_guests")
 	private Integer limitGuests;
+    
+    @Column(name = "id_address_event")
 	private Integer idAdressEvent;
+    
+    @Column(name = "id_statustype")
 	private Integer idStatusType;
 
 	public Integer getId() {

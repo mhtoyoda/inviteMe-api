@@ -1,15 +1,45 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Address_Event")
 public class AdressEvent {
+
+	@Id
+	@GeneratedValue
 	private Integer id;
+
+	@Column(name = "placename")
 	private String placeName;
+
+	@Column(name = "streetname")
 	private String streetName;
+
+	@Column(name = "number")
 	private Integer number;
+
+	@Column(name = "complement")
 	private String complement;
+
+	@Column(name = "zipcode")
 	private String zipCode;
+
+	@Column(name = "cityname")
 	private String cityName;
+
+	@Column(name = "longitude")
 	private Long longitude;
+
+	@Column(name = "latitude")
 	private Long latitude;
+
+	@Column(name = "id_state")
+	private Integer idState;
 
 	public Integer getId() {
 		return id;
@@ -83,6 +113,14 @@ public class AdressEvent {
 		this.latitude = latitude;
 	}
 
+	public Integer getIdState() {
+		return idState;
+	}
+
+	public void setIdState(Integer idState) {
+		this.idState = idState;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,6 +130,7 @@ public class AdressEvent {
 		result = prime * result
 				+ ((complement == null) ? 0 : complement.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idState == null) ? 0 : idState.hashCode());
 		result = prime * result
 				+ ((latitude == null) ? 0 : latitude.hashCode());
 		result = prime * result
@@ -128,6 +167,11 @@ public class AdressEvent {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (idState == null) {
+			if (other.idState != null)
+				return false;
+		} else if (!idState.equals(other.idState))
 			return false;
 		if (latitude == null) {
 			if (other.latitude != null)

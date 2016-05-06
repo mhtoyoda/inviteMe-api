@@ -1,7 +1,20 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "EventType_Access")
 public class EventTypeAccess {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "type_access")
 	private String typeAccess;
 
 	public Integer getId() {

@@ -2,14 +2,39 @@ package br.com.application.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Users")
 public class Users {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "lastName")
 	private String lastName;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "gender")
 	private char gender;
+	
+	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "id_statustype")
 	private Integer idStatusType;
+	
+	@Column(name = "date_updated")
 	private Date dateUpdated;
 
 	public Integer getId() {

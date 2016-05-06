@@ -2,12 +2,33 @@ package br.com.application.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "shops")
 public class GuestEvent {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "id_event")
 	private Integer idEvent;
+	
+	@Column(name = "id_user")
 	private Integer idUser;
+	
+	@Column(name = "attendance_confirmed")
 	private Boolean attendanceConfirmed;
+	
+	@Column(name = "time_sent_token")
 	private Date timeSentToken;
+	
+	@Column(name = "token")
 	private String token;
 
 	public Integer getId() {
