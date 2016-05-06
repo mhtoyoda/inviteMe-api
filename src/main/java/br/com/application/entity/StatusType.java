@@ -1,8 +1,8 @@
 package br.com.application.entity;
 
-public class socialType {
+public class StatusType {
 	private Integer id;
-	private String name;
+	private String description;
 
 	public Integer getId() {
 		return id;
@@ -12,20 +12,21 @@ public class socialType {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -37,23 +38,23 @@ public class socialType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		socialType other = (socialType) obj;
+		StatusType other = (StatusType) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "socialType [id=" + id + ", name=" + name + "]";
+		return "Status [id=" + id + ", description=" + description + "]";
 	}
 
 }

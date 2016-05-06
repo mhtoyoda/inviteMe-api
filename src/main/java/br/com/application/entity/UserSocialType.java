@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class UserSocialType {
 	private Integer id;
-	private Integer id_user;
-	private Integer id_social_type;
-	private Integer status;
+	private Integer idUser;
+	private Integer idSocialType;
+	private Boolean status;
 	private Date dateUpdated;
 
 	public Integer getId() {
@@ -17,27 +17,27 @@ public class UserSocialType {
 		this.id = id;
 	}
 
-	public Integer getId_user() {
-		return id_user;
+	public Integer getIdUser() {
+		return idUser;
 	}
 
-	public void setId_user(Integer id_user) {
-		this.id_user = id_user;
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
 	}
 
-	public Integer getId_social_type() {
-		return id_social_type;
+	public Integer getIdSocialType() {
+		return idSocialType;
 	}
 
-	public void setId_social_type(Integer id_social_type) {
-		this.id_social_type = id_social_type;
+	public void setIdSocialType(Integer idSocialType) {
+		this.idSocialType = idSocialType;
 	}
 
-	public Integer getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
@@ -57,8 +57,8 @@ public class UserSocialType {
 				+ ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
-				+ ((id_social_type == null) ? 0 : id_social_type.hashCode());
-		result = prime * result + ((id_user == null) ? 0 : id_user.hashCode());
+				+ ((idSocialType == null) ? 0 : idSocialType.hashCode());
+		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -82,15 +82,15 @@ public class UserSocialType {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (id_social_type == null) {
-			if (other.id_social_type != null)
+		if (idSocialType == null) {
+			if (other.idSocialType != null)
 				return false;
-		} else if (!id_social_type.equals(other.id_social_type))
+		} else if (!idSocialType.equals(other.idSocialType))
 			return false;
-		if (id_user == null) {
-			if (other.id_user != null)
+		if (idUser == null) {
+			if (other.idUser != null)
 				return false;
-		} else if (!id_user.equals(other.id_user))
+		} else if (!idUser.equals(other.idUser))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -98,13 +98,6 @@ public class UserSocialType {
 		} else if (!status.equals(other.status))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "UserSocialType [id=" + id + ", id_user=" + id_user
-				+ ", id_social_type=" + id_social_type + ", status=" + status
-				+ ", dateUpdated=" + dateUpdated + "]";
 	}
 
 }

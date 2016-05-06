@@ -2,13 +2,14 @@ package br.com.application.entity;
 
 import java.util.Date;
 
-public class User {
+public class Users {
 	private Integer id;
 	private String name;
 	private String lastName;
 	private String email;
-	private String senha;
-	private Integer status;
+	private char gender;
+	private String password;
+	private Integer idStatusType;
 	private Date dateUpdated;
 
 	public Integer getId() {
@@ -43,20 +44,28 @@ public class User {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public char getGender() {
+		return gender;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setGender(char gender) {
+		this.gender = gender;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getIdStatusType() {
+		return idStatusType;
+	}
+
+	public void setIdStatusType(Integer idStatusType) {
+		this.idStatusType = idStatusType;
 	}
 
 	public Date getDateUpdated() {
@@ -74,12 +83,15 @@ public class User {
 		result = prime * result
 				+ ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + gender;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((idStatusType == null) ? 0 : idStatusType.hashCode());
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 
@@ -91,7 +103,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		if (dateUpdated == null) {
 			if (other.dateUpdated != null)
 				return false;
@@ -102,10 +114,17 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (gender != other.gender)
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (idStatusType == null) {
+			if (other.idStatusType != null)
+				return false;
+		} else if (!idStatusType.equals(other.idStatusType))
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -117,24 +136,12 @@ public class User {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
+		} else if (!password.equals(other.password))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName
-				+ ", email=" + email + ", senha=" + senha + ", status="
-				+ status + ", dateUpdated=" + dateUpdated + "]";
 	}
 
 }

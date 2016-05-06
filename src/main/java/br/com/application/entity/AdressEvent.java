@@ -2,11 +2,12 @@ package br.com.application.entity;
 
 public class AdressEvent {
 	private Integer id;
-	private String nameStreet;
+	private String placeName;
+	private String streetName;
 	private Integer number;
 	private String complement;
 	private String zipCode;
-	private Integer id_city;
+	private String cityName;
 	private Long longitude;
 	private Long latitude;
 
@@ -18,12 +19,20 @@ public class AdressEvent {
 		this.id = id;
 	}
 
-	public String getNameStreet() {
-		return nameStreet;
+	public String getPlaceName() {
+		return placeName;
 	}
 
-	public void setNameStreet(String nameStreet) {
-		this.nameStreet = nameStreet;
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 
 	public Integer getNumber() {
@@ -50,12 +59,12 @@ public class AdressEvent {
 		this.zipCode = zipCode;
 	}
 
-	public Integer getId_city() {
-		return id_city;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setId_city(Integer id_city) {
-		this.id_city = id_city;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public Long getLongitude() {
@@ -79,16 +88,19 @@ public class AdressEvent {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((cityName == null) ? 0 : cityName.hashCode());
+		result = prime * result
 				+ ((complement == null) ? 0 : complement.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((id_city == null) ? 0 : id_city.hashCode());
 		result = prime * result
 				+ ((latitude == null) ? 0 : latitude.hashCode());
 		result = prime * result
 				+ ((longitude == null) ? 0 : longitude.hashCode());
-		result = prime * result
-				+ ((nameStreet == null) ? 0 : nameStreet.hashCode());
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result
+				+ ((placeName == null) ? 0 : placeName.hashCode());
+		result = prime * result
+				+ ((streetName == null) ? 0 : streetName.hashCode());
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
@@ -102,6 +114,11 @@ public class AdressEvent {
 		if (getClass() != obj.getClass())
 			return false;
 		AdressEvent other = (AdressEvent) obj;
+		if (cityName == null) {
+			if (other.cityName != null)
+				return false;
+		} else if (!cityName.equals(other.cityName))
+			return false;
 		if (complement == null) {
 			if (other.complement != null)
 				return false;
@@ -111,11 +128,6 @@ public class AdressEvent {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (id_city == null) {
-			if (other.id_city != null)
-				return false;
-		} else if (!id_city.equals(other.id_city))
 			return false;
 		if (latitude == null) {
 			if (other.latitude != null)
@@ -127,15 +139,20 @@ public class AdressEvent {
 				return false;
 		} else if (!longitude.equals(other.longitude))
 			return false;
-		if (nameStreet == null) {
-			if (other.nameStreet != null)
-				return false;
-		} else if (!nameStreet.equals(other.nameStreet))
-			return false;
 		if (number == null) {
 			if (other.number != null)
 				return false;
 		} else if (!number.equals(other.number))
+			return false;
+		if (placeName == null) {
+			if (other.placeName != null)
+				return false;
+		} else if (!placeName.equals(other.placeName))
+			return false;
+		if (streetName == null) {
+			if (other.streetName != null)
+				return false;
+		} else if (!streetName.equals(other.streetName))
 			return false;
 		if (zipCode == null) {
 			if (other.zipCode != null)
@@ -143,14 +160,6 @@ public class AdressEvent {
 		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "AdressEvent [id=" + id + ", nameStreet=" + nameStreet
-				+ ", number=" + number + ", complement=" + complement
-				+ ", zipCode=" + zipCode + ", id_city=" + id_city
-				+ ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
 
 }

@@ -1,10 +1,9 @@
 package br.com.application.entity;
 
-
 public class EventType {
 	private Integer id;
-	private String description;
-	private Integer status;
+	private String category;
+	private Integer idStatusType;
 
 	public Integer getId() {
 		return id;
@@ -14,20 +13,20 @@ public class EventType {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Integer getIdStatusType() {
+		return idStatusType;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setIdStatusType(Integer idStatusType) {
+		this.idStatusType = idStatusType;
 	}
 
 	@Override
@@ -35,9 +34,10 @@ public class EventType {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result
+				+ ((idStatusType == null) ? 0 : idStatusType.hashCode());
 		return result;
 	}
 
@@ -50,28 +50,22 @@ public class EventType {
 		if (getClass() != obj.getClass())
 			return false;
 		EventType other = (EventType) obj;
-		if (description == null) {
-			if (other.description != null)
+		if (category == null) {
+			if (other.category != null)
 				return false;
-		} else if (!description.equals(other.description))
+		} else if (!category.equals(other.category))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (status == null) {
-			if (other.status != null)
+		if (idStatusType == null) {
+			if (other.idStatusType != null)
 				return false;
-		} else if (!status.equals(other.status))
+		} else if (!idStatusType.equals(other.idStatusType))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "EventType [id=" + id + ", description=" + description
-				+ ", status=" + status + "]";
 	}
 
 }
