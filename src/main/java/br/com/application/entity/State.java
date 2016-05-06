@@ -1,8 +1,23 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "State")
 public class State {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+    @Column(name = "statename")
 	private String stateName;
+    
+    @Column(name = "country")
 	private String country;
 
 	public Integer getId() {

@@ -1,9 +1,26 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User_Guest_Unified")
 public class UserGuestUnified {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "id_user")
 	private Integer idUser;
+	
+	@Column(name = "id_event")
 	private Integer idEvent;
+	
+	@Column(name = "amount")
 	private Integer amount;
 
 	public Integer getId() {

@@ -1,7 +1,20 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "SocialType")
 public class SocialType {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "name")
 	private String name;
 
 	public Integer getId() {

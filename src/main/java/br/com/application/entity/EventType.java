@@ -1,8 +1,23 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "EventType")
 public class EventType {
+	
+	@Id
+    @GeneratedValue
 	private Integer id;
+	
+	@Column(name = "category")
 	private String category;
+	
+	@Column(name = "id_statustype")
 	private Integer idStatusType;
 
 	public Integer getId() {
