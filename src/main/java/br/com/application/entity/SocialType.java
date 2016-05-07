@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SocialType")
+@Table(name = "socialtype")
 public class SocialType {
 	
 	@Id

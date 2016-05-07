@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "EventType_Access")
+@Table(name = "eventtype_access")
 public class EventTypeAccess {
 	
 	@Id
