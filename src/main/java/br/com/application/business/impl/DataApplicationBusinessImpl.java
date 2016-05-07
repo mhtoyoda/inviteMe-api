@@ -19,7 +19,7 @@ import br.com.application.repository.StatusTypeRepository;
 
 @Component
 public class DataApplicationBusinessImpl implements DataApplicationBusiness {
-
+	
 	@Autowired
 	private StateRepository stateRepository;
 	

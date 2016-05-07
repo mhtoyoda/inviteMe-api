@@ -14,11 +14,11 @@ CREATE SCHEMA IF NOT EXISTS `invviteme` DEFAULT CHARACTER SET utf8 ;
 USE `invviteme` ;
 
 -- -----------------------------------------------------
--- Table `invviteme`.`StatusType`
+-- Table `invviteme`.`statustype`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`StatusType` ;
+DROP TABLE IF EXISTS `invviteme`.`statustype` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`StatusType` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`statustype` (
   `id` INT NOT NULL,
   `description` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`))
@@ -26,11 +26,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`Users`
+-- Table `invviteme`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`Users` ;
+DROP TABLE IF EXISTS `invviteme`.`users` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`Users` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
   `lastName` VARCHAR(60) NOT NULL,
@@ -44,18 +44,18 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`Users` (
   INDEX `fk_status_type_idx` (`id_statustype` ASC),
   CONSTRAINT `fk_status_type`
     FOREIGN KEY (`id_statustype`)
-    REFERENCES `invviteme`.`StatusType` (`id`)
+    REFERENCES `invviteme`.`statustype` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`SocialType`
+-- Table `invviteme`.`socialtype`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`SocialType` ;
+DROP TABLE IF EXISTS `invviteme`.`socialtype` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`SocialType` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`socialtype` (
   `id` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
@@ -63,11 +63,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`User_SocialType`
+-- Table `invviteme`.`user_socialtype`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`User_SocialType` ;
+DROP TABLE IF EXISTS `invviteme`.`user_socialtype` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`User_SocialType` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`user_socialtype` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_user` INT NOT NULL,
   `id_socialtype` INT NOT NULL,
@@ -78,23 +78,23 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`User_SocialType` (
   INDEX `fk_socialtype_idx` (`id_socialtype` ASC),
   CONSTRAINT `fk_user_social_type`
     FOREIGN KEY (`id_user`)
-    REFERENCES `invviteme`.`Users` (`id`)
+    REFERENCES `invviteme`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_socialtype`
     FOREIGN KEY (`id_socialtype`)
-    REFERENCES `invviteme`.`SocialType` (`id`)
+    REFERENCES `invviteme`.`socialtype` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`EventType`
+-- Table `invviteme`.`eventtype`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`EventType` ;
+DROP TABLE IF EXISTS `invviteme`.`eventtype` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`EventType` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`eventtype` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `category` VARCHAR(60) NOT NULL,
   `id_statustype` INT NOT NULL,
@@ -103,11 +103,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`EventType_Access`
+-- Table `invviteme`.`eventtype_access`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`EventType_Access` ;
+DROP TABLE IF EXISTS `invviteme`.`eventtype_access` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`EventType_Access` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`eventtype_access` (
   `id` INT NOT NULL,
   `type_access` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`))
@@ -115,11 +115,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`State`
+-- Table `invviteme`.`state`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`State` ;
+DROP TABLE IF EXISTS `invviteme`.`state` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`State` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`state` (
   `id` INT NOT NULL,
   `statename` VARCHAR(45) NOT NULL,
   `country` VARCHAR(30) NOT NULL,
@@ -128,11 +128,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`Address_Event`
+-- Table `invviteme`.`address_event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`Address_Event` ;
+DROP TABLE IF EXISTS `invviteme`.`address_event` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`Address_Event` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`address_event` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `placename` VARCHAR(80) NOT NULL,
   `streetname` VARCHAR(80) NOT NULL,
@@ -147,18 +147,18 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`Address_Event` (
   INDEX `fk_state_address_idx` (`id_state` ASC),
   CONSTRAINT `fk_state_address`
     FOREIGN KEY (`id_state`)
-    REFERENCES `invviteme`.`State` (`id`)
+    REFERENCES `invviteme`.`state` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`Event`
+-- Table `invviteme`.`event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`Event` ;
+DROP TABLE IF EXISTS `invviteme`.`event` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`Event` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`event` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_owner` INT NOT NULL,
   `id_eventtype_access` INT NOT NULL,
@@ -179,38 +179,38 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`Event` (
   INDEX `fk_status_type_idx` (`id_statustype` ASC),
   CONSTRAINT `fk_user_events`
     FOREIGN KEY (`id_owner`)
-    REFERENCES `invviteme`.`Users` (`id`)
+    REFERENCES `invviteme`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_type_access_events`
     FOREIGN KEY (`id_eventtype_access`)
-    REFERENCES `invviteme`.`EventType_Access` (`id`)
+    REFERENCES `invviteme`.`eventtype_access` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_type_events`
     FOREIGN KEY (`id_eventtype`)
-    REFERENCES `invviteme`.`EventType` (`id`)
+    REFERENCES `invviteme`.`eventtype` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_address_events`
     FOREIGN KEY (`id_address_event`)
-    REFERENCES `invviteme`.`Address_Event` (`id`)
+    REFERENCES `invviteme`.`address_event` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_status_type`
     FOREIGN KEY (`id_statustype`)
-    REFERENCES `invviteme`.`StatusType` (`id`)
+    REFERENCES `invviteme`.`statustype` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`Guest_Event`
+-- Table `invviteme`.`guest_event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`Guest_Event` ;
+DROP TABLE IF EXISTS `invviteme`.`guest_event` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`Guest_Event` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`guest_event` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_event` INT NOT NULL,
   `id_user` INT NOT NULL,
@@ -222,23 +222,23 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`Guest_Event` (
   INDEX `fk_user_guet_idx` (`id_user` ASC),
   CONSTRAINT `fk_event_guest`
     FOREIGN KEY (`id_event`)
-    REFERENCES `invviteme`.`Event` (`id`)
+    REFERENCES `invviteme`.`event` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_guest`
     FOREIGN KEY (`id_user`)
-    REFERENCES `invviteme`.`Users` (`id`)
+    REFERENCES `invviteme`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `invviteme`.`User_Guest_Unified`
+-- Table `invviteme`.`user_guest_unified`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `invviteme`.`User_Guest_Unified` ;
+DROP TABLE IF EXISTS `invviteme`.`user_guest_unified` ;
 
-CREATE TABLE IF NOT EXISTS `invviteme`.`User_Guest_Unified` (
+CREATE TABLE IF NOT EXISTS `invviteme`.`user_guest_unified` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_user` INT NOT NULL,
   `id_event` INT NOT NULL,
@@ -248,12 +248,12 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`User_Guest_Unified` (
   INDEX `fk_event_guest_unified_idx` (`id_event` ASC),
   CONSTRAINT `fk_user_guest_unified`
     FOREIGN KEY (`id_user`)
-    REFERENCES `invviteme`.`Users` (`id`)
+    REFERENCES `invviteme`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_guest_unified`
     FOREIGN KEY (`id_event`)
-    REFERENCES `invviteme`.`Event` (`id`)
+    REFERENCES `invviteme`.`event` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -262,53 +262,53 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO `invviteme`.`StatusType`(`id`,`description`) VALUES(1,'Ativo');
-INSERT INTO `invviteme`.`StatusType`(`id`,`description`) VALUES(2,'Cancelado');
-INSERT INTO `invviteme`.`StatusType`(`id`,`description`) VALUES(3,'Bloqueado');
-INSERT INTO `invviteme`.`StatusType`(`id`,`description`) VALUES(4,'Finalizado');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(1,'Ativo');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(2,'Cancelado');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(3,'Bloqueado');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(4,'Finalizado');
 
-INSERT INTO `invviteme`.`SocialType`(`id`,`name`) VALUES(1,'Facebook');
-INSERT INTO `invviteme`.`SocialType`(`id`,`name`) VALUES(2,'Twitter');
-INSERT INTO `invviteme`.`SocialType`(`id`,`name`) VALUES(3,'Google+');
+INSERT INTO `invviteme`.`socialtype`(`id`,`name`) VALUES(1,'Facebook');
+INSERT INTO `invviteme`.`socialtype`(`id`,`name`) VALUES(2,'Twitter');
+INSERT INTO `invviteme`.`socialtype`(`id`,`name`) VALUES(3,'Google+');
 
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Congresso, seminário', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Curso, workshop', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Encontro, networking', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Esportivo', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Feira, exposição', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Filme, cinema, teatro', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Gastronômico', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Religioso, espiritual', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Show, música, festa', 1);
-INSERT INTO `invviteme`.`EventType`(`category`,`id_statustype`) VALUES('Outros Eventos', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Congresso, seminário', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Curso, workshop', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Encontro, networking', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Esportivo', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Feira, exposição', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Filme, cinema, teatro', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Gastronômico', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Religioso, espiritual', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Show, música, festa', 1);
+INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Outros eventos', 1);
 
-INSERT INTO `invviteme`.`EventType_Access`(`id`,`type_access`) VALUES(1,'Público');
-INSERT INTO `invviteme`.`EventType_Access`(`id`,`type_access`) VALUES(2,'Privado');
+INSERT INTO `invviteme`.`eventtype_access`(`id`,`type_access`) VALUES(1,'Público');
+INSERT INTO `invviteme`.``(`id`,`type_access`) VALUES(2,'Privado');
 
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(1,'Acre','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(2,'Alagoas','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(3,'Amapá','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(4,'Amazonas','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(5,'Bahia','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(6,'Ceará','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(7,'Distrito Federal','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(8,'Espírito Santo','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(9,'Goiás','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(10,'Maranhão','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(11,'Mato Grosso','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(12,'Mato Grosso do Sul','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(13,'Minas Gerais','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(14,'Pará','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(15,'Paraíba','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(16,'Paraná','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(17,'Pernambuco','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(18,'Piauí','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(19,'Rio de Janeiro','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(20,'Rio Grande do Norte','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(21,'Rio Grande do Sul','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(22,'Rondônia','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(23,'Roraima','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(24,'Santa Catarina','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(25,'São Paulo','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(26,'Sergipe','Brasil');
-INSERT INTO `invviteme`.`State`(`id`,`statename`,`country`) VALUES(27,'Tocantins','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(1,'Acre','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(2,'Alagoas','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(3,'Amapá','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(4,'Amazonas','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(5,'Bahia','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(6,'Ceará','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(7,'Distrito Federal','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(8,'Espírito Santo','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(9,'Goiás','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(10,'Maranhão','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(11,'Mato Grosso','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(12,'Mato Grosso do Sul','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(13,'Minas Gerais','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(14,'Pará','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(15,'Paraíba','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(16,'Paraná','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(17,'Pernambuco','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(18,'Piauí','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(19,'Rio de Janeiro','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(20,'Rio Grande do Norte','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(21,'Rio Grande do Sul','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(22,'Rondônia','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(23,'Roraima','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(24,'Santa Catarina','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(25,'São Paulo','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(26,'Sergipe','Brasil');
+INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(27,'Tocantins','Brasil');
