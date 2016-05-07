@@ -65,4 +65,9 @@ public class EventTypeAccess {
 		return true;
 	}
 
+    @Override
+    public String toString() {
+        return "EventTypeAccess [id=" + id + ", typeAccess=" + typeAccess + "]";
+    }
+
 }

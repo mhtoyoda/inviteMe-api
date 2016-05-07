@@ -68,5 +68,5 @@ public class SocialType {
 	public String toString() {
 		return "socialType [id=" + id + ", name=" + name + "]";
 	}
-
+	
 }

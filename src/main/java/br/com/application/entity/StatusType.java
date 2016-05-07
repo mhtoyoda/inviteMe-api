@@ -56,5 +56,4 @@ public class StatusType {
 	public String toString() {
 		return "Status [id=" + id + ", description=" + description + "]";
 	}
-
 }
