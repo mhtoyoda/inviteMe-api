@@ -1,7 +1,17 @@
 package br.com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "statustype")
 public class StatusType {
+	
+	@Id
 	private Integer id;
+	@Column(name = "description")
 	private String description;
 
 	public Integer getId() {
