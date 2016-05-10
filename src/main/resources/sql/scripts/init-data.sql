@@ -283,7 +283,7 @@ INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Show, m√
 INSERT INTO `invviteme`.`eventtype`(`category`,`id_statustype`) VALUES('Outros eventos', 1);
 
 INSERT INTO `invviteme`.`eventtype_access`(`id`,`type_access`) VALUES(1,'P√∫blico');
-INSERT INTO `invviteme`.``(`id`,`type_access`) VALUES(2,'Privado');
+INSERT INTO `invviteme`.`eventtype_access`(`id`,`type_access`) VALUES(2,'Privado');
 
 INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(1,'Acre','Brasil');
 INSERT INTO `invviteme`.`state`(`id`,`statename`,`country`) VALUES(2,'Alagoas','Brasil');
