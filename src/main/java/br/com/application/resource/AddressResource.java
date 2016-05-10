@@ -15,7 +15,7 @@ import br.com.application.business.AddressBusiness;
 import br.com.application.entity.AddressEvent;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/invviteme/data")
 public class AddressResource {
     
     @Autowired
@@ -31,4 +31,40 @@ public class AddressResource {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+	@RequestMapping(value = "address", method = RequestMethod.POST)
+	public void createAddress(AddressEvent addressEvent) {
+		System.out.println("Creating Address " + addressEvent.getStreetName());
+		
+		if(addressEvent.getId() == null || !addressBusiness.isAddressExists(addressEvent)){
+			addressBusiness.save(addressEvent);
+			System.out.println("Address Created " + addressEvent.getStreetName());
+		}else{
+			System.out.println("Address Already exists" + addressEvent.getStreetName());
+		}		
+	}
+	
+	@RequestMapping(value = "address", method = RequestMethod.PUT)
+	public void updateAddress(AddressEvent addressEvent) {
+		System.out.println("Updating Address " + addressEvent.getStreetName());
+		
+		if(addressEvent.getId() != null && addressBusiness.isAddressExists(addressEvent)){
+			addressBusiness.save(addressEvent);
+			System.out.println("Address Updated " + addressEvent.getStreetName());
+		}else{
+			System.out.println("Address does not exists" + addressEvent.getStreetName());
+		}		
+	}
+	
+	@RequestMapping(value = "address", method = RequestMethod.DELETE)
+	public void deleteAddress(AddressEvent addressEvent) {
+		System.out.println("Updating Address " + addressEvent.getStreetName());
+		
+		if(addressEvent.getId() != null && addressBusiness.isAddressExists(addressEvent)){
+			addressBusiness.delete(addressEvent);
+			System.out.println("Address Deleted " + addressEvent.getStreetName());
+		}else{
+			System.out.println("Address does not exists" + addressEvent.getStreetName());
+		}		
+	}
 }

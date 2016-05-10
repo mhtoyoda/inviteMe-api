@@ -20,4 +20,19 @@ public class AddressBusinessImpl implements AddressBusiness{
     public List<AddressEvent> addressList(){
         return (List<AddressEvent>) addressRepository.findAll();
     }
+   
+	@Override
+	public boolean isAddressExists(AddressEvent addressEvent) {
+		return addressRepository.exists(addressEvent.getId());
+	}
+
+	@Override
+	public void save(AddressEvent addressEvent) {
+		addressRepository.save(addressEvent);		
+	}
+
+	@Override
+	public void delete(AddressEvent addressEvent) {
+		addressRepository.delete(addressEvent);				
+	}
 }

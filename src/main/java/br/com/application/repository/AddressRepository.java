@@ -7,5 +7,5 @@ import br.com.application.entity.AddressEvent;
 
 @Repository
 public interface AddressRepository extends CrudRepository<AddressEvent, Integer>{
-
+	
 }
