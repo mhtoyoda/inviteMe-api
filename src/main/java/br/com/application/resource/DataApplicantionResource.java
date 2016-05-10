@@ -19,7 +19,7 @@ import br.com.application.entity.State;
 import br.com.application.entity.StatusType;
 
 @RestController
-@RequestMapping("/data")
+@RequestMapping("/invviteme/data")
 public class DataApplicantionResource {
 
 	@Autowired
