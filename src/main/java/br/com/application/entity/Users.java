@@ -1,5 +1,6 @@
 package br.com.application.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,9 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class Users implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3003719924454999905L;
+
+	@Id
     @GeneratedValue
     private Integer id;
 
