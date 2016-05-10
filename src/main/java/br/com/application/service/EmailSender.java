@@ -1,12 +1,12 @@
 package br.com.application.service;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +17,7 @@ public class EmailSender {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	public void sendEmail(String to, String subject, String message){
+	public void sendEmail(String to, String subject, String message) throws javax.mail.MessagingException{
 		MimeMessage mail = mailSender.createMimeMessage();
 		try {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);            
