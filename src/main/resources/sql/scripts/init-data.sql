@@ -266,6 +266,8 @@ INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(1,'Ativo');
 INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(2,'Cancelado');
 INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(3,'Bloqueado');
 INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(4,'Finalizado');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(5,'Pendente');
+INSERT INTO `invviteme`.`statustype`(`id`,`description`) VALUES(6,'Desativado');
 
 INSERT INTO `invviteme`.`socialtype`(`id`,`name`) VALUES(1,'Facebook');
 INSERT INTO `invviteme`.`socialtype`(`id`,`name`) VALUES(2,'Twitter');
