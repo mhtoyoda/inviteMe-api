@@ -19,6 +19,7 @@ public class StatusType {
 	/**
      * Default Constructor only use JacksonMapper
      */
+	@Deprecated
 	public StatusType(){}
 	
 	public StatusType(StatusData data) {	

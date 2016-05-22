@@ -22,7 +22,7 @@ import br.com.application.exception.ErrorRepositoryException;
 @RequestMapping("/invviteme/data")
 public class AddressResource {
 
-    private Logger logger = Logger.getLogger(UserResource.class);
+    private Logger logger = Logger.getLogger(AddressResource.class);
 
     @Autowired
     private AddressBusiness addressBusiness;
@@ -39,7 +39,7 @@ public class AddressResource {
 
     @RequestMapping(value = "address/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AddressEvent> findAddressById(@PathVariable("id") Integer id) {
-        AddressEvent addressEvent = new AddressEvent();
+        AddressEvent addressEvent = null;
         try {
             addressEvent = addressBusiness.findOne(id);
             if (null == addressEvent) {
@@ -54,7 +54,7 @@ public class AddressResource {
 
     @RequestMapping(value = "address", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AddressEvent> createAddress(@RequestBody AddressEvent addressEvent) {
-        AddressEvent addressCreated = new AddressEvent();
+        AddressEvent addressCreated = null;
 
         try {
             addressCreated = addressBusiness.save(addressEvent);
@@ -67,7 +67,7 @@ public class AddressResource {
 
     @RequestMapping(value = "address", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AddressEvent> updateAddress(@RequestBody AddressEvent addressEvent) {
-        AddressEvent addressUpdated = new AddressEvent();
+        AddressEvent addressUpdated = null;
         try {
             addressUpdated = addressBusiness.updateAddress(addressEvent);
             if (null == addressUpdated) {
@@ -82,7 +82,7 @@ public class AddressResource {
 
     @RequestMapping(value = "address/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteAddress(@PathVariable("id") Integer id) {
-        AddressEvent addressEvent = new AddressEvent();
+        AddressEvent addressEvent = null;
         try {
             addressEvent = addressBusiness.findOne(id);
             if (addressEvent != null) {

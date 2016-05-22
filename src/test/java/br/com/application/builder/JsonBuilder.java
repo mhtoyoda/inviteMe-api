@@ -31,7 +31,9 @@ public class JsonBuilder {
 	
 	   public String builderAddress(){	     
 	        State state = new State();
-	        state.setId(10);
+	        state.setId(25);
+	        state.setStateName("São Paulo");
+	        state.setCountry("Brasil");
 	        AddressEvent address = new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo",
 	        		"123456", "São Paulo", 1234534L, -1234534L, state);
 	        	        

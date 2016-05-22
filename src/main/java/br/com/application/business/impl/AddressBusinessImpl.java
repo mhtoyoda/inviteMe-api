@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import br.com.application.business.AddressBusiness;
 import br.com.application.entity.AddressEvent;
+import br.com.application.entity.State;
 import br.com.application.exception.ErrorRepositoryException;
 import br.com.application.repository.AddressRepository;
-import br.com.application.repository.StatusTypeRepository;
+import br.com.application.repository.StateRepository;
 
 
 @Component
@@ -19,7 +20,7 @@ public class AddressBusinessImpl implements AddressBusiness{
     private AddressRepository addressRepository;
     
     @Autowired
-    private StatusTypeRepository statusTypeRepository;
+    private StateRepository stateRepository;
     
     
     @Override
@@ -67,21 +68,15 @@ public class AddressBusinessImpl implements AddressBusiness{
 	@Override
     public AddressEvent updateAddress(AddressEvent address) throws ErrorRepositoryException{
         try{
-            AddressEvent addressUpdated = findOne(address.getId());
-            if(null == addressUpdated){
+            AddressEvent addressFind = findOne(address.getId());
+            if(null == addressFind){
                return null; 
             }
-            
-            addressUpdated.setPlaceName(address.getPlaceName());
-            addressUpdated.setStreetName(address.getStreetName());
-            addressUpdated.setNumber(address.getNumber());
-            addressUpdated.setComplement(address.getComplement());
-            addressUpdated.setZipCode(address.getZipCode());
-            addressUpdated.setCityName(address.getCityName());
-            addressUpdated.setLongitude(address.getLongitude());
-            addressUpdated.setLatitude(address.getLatitude());
-            addressUpdated.setState(address.getState());
-            
+            State state = stateRepository.findOne(address.getState().getId());
+            AddressEvent addressUpdated = new AddressEvent(address.getPlaceName(), address.getStreetName(), address.getNumber(),
+            		address.getComplement(), address.getZipCode(), address.getCityName(),
+            		address.getLongitude(), address.getLatitude(), state);            
+            addressUpdated.setId(address.getId());                        
             return save(addressUpdated);
         }catch(Exception e){
             throw new ErrorRepositoryException(e.getMessage());

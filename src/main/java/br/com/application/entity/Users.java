@@ -52,6 +52,7 @@ public class Users implements Serializable {
     /**
      * Default Constructor only use JacksonMapper
      */
+    @Deprecated
     public Users(){}    
 	public Users(String name, String lastName, String phoneNumber, String email, String password, char gender, StatusType statusType) {		
 		this.name = name;
