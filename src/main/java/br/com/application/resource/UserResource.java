@@ -30,7 +30,7 @@ public class UserResource {
 
 	@RequestMapping(value = "user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
-		Users userCreated = new Users();
+		Users userCreated = null;
 		try {
 			userCreated = userBusiness.save(user);
 			return new ResponseEntity<Users>(userCreated, HttpStatus.OK);
@@ -42,7 +42,7 @@ public class UserResource {
 
 	@RequestMapping(value = "user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> findUserById(@PathVariable("id") Integer id) {
-		Users user = new Users();
+		Users user = null;
 		try {
 			user = userBusiness.findOne(id);
 			if (null == user) {
@@ -58,7 +58,7 @@ public class UserResource {
 	@RequestMapping(value = "user", method = RequestMethod.PUT, 
 					produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
-		Users userUpdated = new Users();
+		Users userUpdated = null;
 		try {
 			userUpdated = userBusiness.updateUser(user);
 			if( null == userUpdated ){

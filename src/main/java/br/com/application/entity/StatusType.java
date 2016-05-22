@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.application.data.StatusData;
+
 @Entity
 @Table(name = "statustype")
 public class StatusType {
@@ -14,20 +16,22 @@ public class StatusType {
 	@Column(name = "description")
 	private String description;
 
+	/**
+     * Default Constructor only use JacksonMapper
+     */
+	public StatusType(){}
+	
+	public StatusType(StatusData data) {	
+		this.id = data.getId();
+		this.description = data.getDescription();
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getDescription() {
 		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	@Override

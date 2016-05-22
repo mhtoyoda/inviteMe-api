@@ -14,4 +14,12 @@ public interface UserBusiness {
 	Users updateUser(Users user) throws ErrorRepositoryException;
 
 	List<Users> listAll() throws ErrorRepositoryException;
+
+	Users activeUser(Users user) throws ErrorRepositoryException;
+
+	Users inactiveUser(Users user) throws ErrorRepositoryException;
+
+	Users blockUser(Users user) throws ErrorRepositoryException;
+
+	Users alterPasswordUser(Users user, String password) throws ErrorRepositoryException;
 }

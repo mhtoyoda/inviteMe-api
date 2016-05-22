@@ -4,9 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class PasswordManager {
 
 	public static String encrypt(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {

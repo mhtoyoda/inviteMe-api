@@ -1,32 +1,22 @@
 package br.com.application.builder;
 
-import java.util.Date;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
+import br.com.application.data.GenderData;
 import br.com.application.entity.AddressEvent;
 import br.com.application.entity.State;
-import br.com.application.entity.StatusType;
 import br.com.application.entity.Users;
+import br.com.application.security.PasswordManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonBuilder {
 
-	public String builderUser(Users user){
-		if( user == null ){
-			user = new Users();
-		}
-		user.setName("Ana Carolina");
-		user.setLastName("Da Silva");
-		user.setEmail("ana.carolina@teste.com.br");
-		user.setDateUpdated(new Date());
-		user.setGender('F');
-		user.setPassword("MPDS@#!2");
-		user.setPhoneNumber("1190901020");
-		StatusType statusType = new StatusType();
-		statusType.setId(1);
-		statusType.setDescription("Ativo");
-		user.setStatusType(statusType );
+	public String builderUser() throws NoSuchAlgorithmException, UnsupportedEncodingException{		
+		Users user = new Users("Ana Carolina", "Da Silva", "1190901020", "ana.carolina@teste.com.br", GenderData.FEMALE);		
+		user.alterPassword(PasswordManager.encrypt("admin123"));		
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
@@ -66,8 +56,8 @@ public class JsonBuilder {
 	        return json;
 	    }
 	
-	public static void main(String[] args) {
-		String jsonUser = new JsonBuilder().builderUser(new Users());
+	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		String jsonUser = new JsonBuilder().builderUser();
 		String jsonAddress = new JsonBuilder().builderAddress(new AddressEvent());
 
 		System.out.println(jsonUser);

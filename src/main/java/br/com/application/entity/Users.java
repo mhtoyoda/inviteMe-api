@@ -1,6 +1,8 @@
 package br.com.application.entity;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import br.com.application.data.GenderData;
+import br.com.application.data.StatusData;
+import br.com.application.security.PasswordManager;
 
 @Entity
 @Table(name = "users")
@@ -48,80 +54,78 @@ public class Users implements Serializable {
 
     @Column(name = "date_updated")
     private Date dateUpdated;
+	
+    /**
+     * Default Constructor only use JacksonMapper
+     */
+    public Users(){}    
+	public Users(String name, String lastName, String phoneNumber, String email, GenderData genderType) {		
+		this.name = name;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.gender = genderType.getGender();
+		this.statusType = new StatusType(StatusData.PENDENTE);
+		this.dateUpdated = new Date();
+	}
 
     public Integer getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public char getGender() {
+		return gender;
+	}
+	
+	public void alterPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		this.password = PasswordManager.encrypt(password);
+		this.dateUpdated = new Date();
+	}
+	
+	public String getPassword() {
+		return password;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public void blockUser(){
+		this.statusType = new StatusType(StatusData.BLOQUEADO);
+		this.dateUpdated = new Date();
+	}
+	
+	public void activeUser(){
+		this.statusType = new StatusType(StatusData.ATIVO);
+		this.dateUpdated = new Date();
+	}
+	
+	public void inactiveUser(){
+		this.statusType = new StatusType(StatusData.DESATIVADO);
+		this.dateUpdated = new Date();
+	}
+	
+	public StatusType getStatusType() {
+		return statusType;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	public Date getDateUpdated() {
+		return dateUpdated;
+	}
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public char getGender() {
-        return gender;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public StatusType getStatusType() {
-        return statusType;
-    }
-
-    public void setStatusType(StatusType statusType) {
-        this.statusType = statusType;
-    }
-
-    public Date getDateUpdated() {
-        return dateUpdated;
-    }
-
-    public void setDateUpdated(Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
-    }
-
-    @Override
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -176,5 +180,4 @@ public class Users implements Serializable {
         return "Users [id=" + id + ", name=" + name + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", gender="
                         + gender + ", password=" + password + ", statusType=" + statusType + ", dateUpdated=" + dateUpdated + "]";
     }
-
 }
