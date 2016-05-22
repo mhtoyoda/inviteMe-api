@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.application.business.UserBusiness;
-import br.com.application.data.GenderData;
 import br.com.application.entity.Users;
 import br.com.application.exception.ErrorRepositoryException;
 import br.com.application.repository.StatusTypeRepository;
@@ -45,12 +44,13 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users updateUser(Users user) throws ErrorRepositoryException{
 		try{
-			Users userUpdated = findOne(user.getId());
-			if(null == userUpdated){
+			Users userFind = findOne(user.getId());
+			if(null == userFind){
 			   return null;	
 			}
-			userUpdated = new Users(user.getName(), user.getLastName(), user.getPhoneNumber(),
-									user.getEmail(), GenderData.valueOf(String.valueOf(user.getGender())));						
+			Users userUpdated = new Users(user.getName(), user.getLastName(), user.getPhoneNumber(),
+									user.getEmail(), user.getGender());
+			userUpdated.setId(userFind.getId());
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());

@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.application.data.GenderData;
 import br.com.application.data.StatusData;
 import br.com.application.security.PasswordManager;
 
@@ -59,16 +58,20 @@ public class Users implements Serializable {
      * Default Constructor only use JacksonMapper
      */
     public Users(){}    
-	public Users(String name, String lastName, String phoneNumber, String email, GenderData genderType) {		
+	public Users(String name, String lastName, String phoneNumber, String email, char gender) {		
 		this.name = name;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.gender = genderType.getGender();
+		this.gender = gender;
 		this.statusType = new StatusType(StatusData.PENDENTE);
 		this.dateUpdated = new Date();
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
     public Integer getId() {
 		return id;
 	}
