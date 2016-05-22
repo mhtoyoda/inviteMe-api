@@ -1,8 +1,6 @@
 package br.com.application.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import br.com.application.data.StatusData;
-import br.com.application.security.PasswordManager;
 
 @Entity
 @Table(name = "users")
@@ -58,13 +53,14 @@ public class Users implements Serializable {
      * Default Constructor only use JacksonMapper
      */
     public Users(){}    
-	public Users(String name, String lastName, String phoneNumber, String email, char gender) {		
+	public Users(String name, String lastName, String phoneNumber, String email, String password, char gender, StatusType statusType) {		
 		this.name = name;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.password = password;		
 		this.gender = gender;
-		this.statusType = new StatusType(StatusData.PENDENTE);
+		this.statusType = statusType;
 		this.dateUpdated = new Date();
 	}
 
@@ -96,27 +92,17 @@ public class Users implements Serializable {
 		return gender;
 	}
 	
-	public void alterPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		this.password = PasswordManager.encrypt(password);
+	public void alterPassword(String password) {
+		this.password = password;
 		this.dateUpdated = new Date();
 	}
 	
 	public String getPassword() {
 		return password;
 	}
-
-	public void blockUser(){
-		this.statusType = new StatusType(StatusData.BLOQUEADO);
-		this.dateUpdated = new Date();
-	}
 	
-	public void activeUser(){
-		this.statusType = new StatusType(StatusData.ATIVO);
-		this.dateUpdated = new Date();
-	}
-	
-	public void inactiveUser(){
-		this.statusType = new StatusType(StatusData.DESATIVADO);
+	public void alterStatusType(StatusType statusType){
+		this.statusType = statusType;
 		this.dateUpdated = new Date();
 	}
 	

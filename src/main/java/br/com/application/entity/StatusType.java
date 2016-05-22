@@ -15,7 +15,7 @@ public class StatusType {
 	private Integer id;
 	@Column(name = "description")
 	private String description;
-
+	
 	/**
      * Default Constructor only use JacksonMapper
      */
@@ -33,7 +33,7 @@ public class StatusType {
 	public String getDescription() {
 		return description;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

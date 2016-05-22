@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.application.business.UserBusiness;
+import br.com.application.data.StatusData;
+import br.com.application.entity.StatusType;
 import br.com.application.entity.Users;
 import br.com.application.exception.ErrorRepositoryException;
 import br.com.application.repository.StatusTypeRepository;
@@ -48,9 +50,10 @@ public class UserBusinessImpl implements UserBusiness {
 			if(null == userFind){
 			   return null;	
 			}
+			StatusType statusType = statusTypeRepository.findOne(StatusData.PENDENTE.getId());
 			Users userUpdated = new Users(user.getName(), user.getLastName(), user.getPhoneNumber(),
-									user.getEmail(), user.getGender());
-			userUpdated.setId(userFind.getId());
+									user.getEmail(), user.getPassword(), user.getGender(), statusType);
+			userUpdated.setId(user.getId());
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
@@ -64,7 +67,8 @@ public class UserBusinessImpl implements UserBusiness {
 			if(null == userUpdated){
 			   return null;	
 			}
-			userUpdated.activeUser();									
+			StatusType statusType = statusTypeRepository.findOne(StatusData.ATIVO.getId());
+			userUpdated.alterStatusType(statusType);									
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
@@ -78,7 +82,8 @@ public class UserBusinessImpl implements UserBusiness {
 			if(null == userUpdated){
 			   return null;	
 			}
-			userUpdated.inactiveUser();									
+			StatusType statusType = statusTypeRepository.findOne(StatusData.DESATIVADO.getId());
+			userUpdated.alterStatusType(statusType);									
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
@@ -92,7 +97,8 @@ public class UserBusinessImpl implements UserBusiness {
 			if(null == userUpdated){
 			   return null;	
 			}
-			userUpdated.blockUser();									
+			StatusType statusType = statusTypeRepository.findOne(StatusData.BLOQUEADO.getId());
+			userUpdated.alterStatusType(statusType);
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
