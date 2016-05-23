@@ -16,6 +16,16 @@ public class EventTypeAccess {
 	
 	@Column(name = "type_access")
 	private String typeAccess;
+	
+	/**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+	public EventTypeAccess() {}
+	
+	public EventTypeAccess(String typeAccess) {
+		this.typeAccess = typeAccess;
+	}
 
 	public Integer getId() {
 		return id;
@@ -29,9 +39,6 @@ public class EventTypeAccess {
 		return typeAccess;
 	}
 
-	public void setTypeAccess(String typeAccess) {
-		this.typeAccess = typeAccess;
-	}
 
 	@Override
 	public int hashCode() {
@@ -69,5 +76,4 @@ public class EventTypeAccess {
     public String toString() {
         return "EventTypeAccess [id=" + id + ", typeAccess=" + typeAccess + "]";
     }
-
 }

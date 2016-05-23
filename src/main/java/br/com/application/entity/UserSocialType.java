@@ -1,5 +1,6 @@
 package br.com.application.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,9 +32,22 @@ public class UserSocialType {
 	private Boolean status;
 	
 	@Column(name = "date_updated")
-	private Date dateUpdated;
+	private LocalDate dateUpdated;
+	
+	/**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+	public UserSocialType(){}	
+	
+    public UserSocialType(Users user, SocialType socialType, Date dateUpdated) {		
+		this.user = user;
+		this.socialType = socialType;
+		this.status = Boolean.TRUE;
+		this.dateUpdated = LocalDate.now();
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -42,38 +56,27 @@ public class UserSocialType {
     }
 
     public Users getUser() {
-        return user;
-    }
+		return user;
+	}
 
-    public void setUser(Users user) {
-        this.user = user;
-    }
+	public SocialType getSocialType() {
+		return socialType;
+	}
 
-    public SocialType getSocialType() {
-        return socialType;
-    }
+	public void alterStatus(Boolean status) {
+		this.status = status;
+		this.dateUpdated = LocalDate.now();
+	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
 
-    public void setSocialType(SocialType socialType) {
-        this.socialType = socialType;
-    }
+	public LocalDate getDateUpdated() {
+		return dateUpdated;
+	}
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public Date getDateUpdated() {
-        return dateUpdated;
-    }
-
-    public void setDateUpdated(Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
-    }
-
-    @Override
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

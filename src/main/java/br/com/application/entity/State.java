@@ -20,6 +20,17 @@ public class State {
     @Column(name = "country")
 	private String country;
 
+    /**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+    public State(){}
+    
+	public State(String stateName, String country) {
+		this.stateName = stateName;
+		this.country = country;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -32,16 +43,8 @@ public class State {
 		return stateName;
 	}
 
-	public void setStateName(String stateName) {
-		this.stateName = stateName;
-	}
-
 	public String getCountry() {
 		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	@Override

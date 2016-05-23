@@ -27,7 +27,19 @@ public class UserGuestUnified {
     @Column(name = "amount")
     private Integer amount;
 
-    public Integer getId() {
+    /**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+    public UserGuestUnified(){}
+	
+    public UserGuestUnified(Users user, Event event, Integer amount) {
+		this.user = user;
+		this.event = event;
+		this.amount = amount;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -39,24 +51,12 @@ public class UserGuestUnified {
         return user;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
-    }
-
     public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
     public Integer getAmount() {
         return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     @Override

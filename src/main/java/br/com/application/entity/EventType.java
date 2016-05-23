@@ -19,7 +19,18 @@ public class EventType {
     @Column(name = "category")
     private String category;
 
-    @ManyToOne
+    /**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+    public EventType() {}
+    
+    public EventType(String category, StatusType statusType) {
+		this.category = category;
+		this.statusType = statusType;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "id_statustype")
     private StatusType statusType;
 
@@ -35,16 +46,8 @@ public class EventType {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public StatusType getStatusType() {
         return statusType;
-    }
-
-    public void setStatusType(StatusType statusType) {
-        this.statusType = statusType;
     }
 
     @Override

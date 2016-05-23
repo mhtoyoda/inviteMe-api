@@ -17,6 +17,16 @@ public class SocialType {
 	@Column(name = "name")
 	private String name;
 
+	/**
+	 * Default Constructor only use JacksonMapper
+	 */
+	@Deprecated
+	public SocialType(){}
+	
+	public SocialType(String name) {
+		this.name = name;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -27,10 +37,6 @@ public class SocialType {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override

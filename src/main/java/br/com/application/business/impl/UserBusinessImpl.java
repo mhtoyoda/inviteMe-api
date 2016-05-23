@@ -51,7 +51,7 @@ public class UserBusinessImpl implements UserBusiness {
 			   return null;	
 			}
 			StatusType statusType = statusTypeRepository.findOne(StatusData.PENDENTE.getId());
-			Users userUpdated = new Users(user.getName(), user.getLastName(), user.getPhoneNumber(),
+			Users userUpdated = new Users(user.getName(), user.getLastName(), user.getBirthday(), user.getPhoneNumber(),
 									user.getEmail(), user.getPassword(), user.getGender(), statusType);
 			userUpdated.setId(user.getId());
 			return save(userUpdated);
