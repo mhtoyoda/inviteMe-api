@@ -39,7 +39,9 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`users` (
   `gender` CHAR(1) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `id_statustype` INT NOT NULL,
+  `date_birthday` DATETIME NOT NULL,
   `date_updated` DATETIME NOT NULL,
+  `admin` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_status_type_idx` (`id_statustype` ASC),
   CONSTRAINT `fk_status_type`
@@ -109,7 +111,7 @@ DROP TABLE IF EXISTS `invviteme`.`eventtype_access` ;
 
 CREATE TABLE IF NOT EXISTS `invviteme`.`eventtype_access` (
   `id` INT NOT NULL,
-  `type_access` VARCHAR(20) NOT NULL,
+  `type_access` VARCHAR(20) NOT NULL,  
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -165,9 +167,13 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`event` (
   `id_eventtype` INT NOT NULL,
   `title` VARCHAR(60) NOT NULL,
   `description` VARCHAR(200) NOT NULL,
+  `event_for_free` TINYINT(1) NOT NULL,
+  `can_sendInvite_external` TINYINT(1) NOT NULL,
+  `hidden_event` TINYINT(1) NOT NULL,
   `eventdate` DATETIME NOT NULL,
-  `event_init_hour` TIME(6) NOT NULL,
-  `event_end_hour` TIME(6) NOT NULL,
+  `event_init_hour` TIMESTAMP NOT NULL,
+  `event_end_hour` TIMESTAMP NOT NULL,
+  `minimum_age` INT NOT NULL,
   `limit_guests` INT NOT NULL,
   `id_address_event` INT NOT NULL,
   `id_statustype` INT NOT NULL,
@@ -216,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `invviteme`.`guest_event` (
   `id_user` INT NOT NULL,
   `attendance_confirmed` TINYINT(1) NOT NULL,
   `time_sent_token` DATETIME NULL,
+  `date_attendance_confirmed` TIMESTAMP NULL,
   `token` VARCHAR(80) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_event_guest_idx` (`id_event` ASC),
