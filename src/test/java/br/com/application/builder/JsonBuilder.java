@@ -13,6 +13,7 @@ import br.com.application.security.PasswordManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class JsonBuilder {
 
@@ -24,6 +25,7 @@ public class JsonBuilder {
 				10, 2), "1190901020", "ana.carolina@teste.com.br", password,
 				'F', statusType);
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
 		String json = "";
 		try {
 			json = mapper.writeValueAsString(user);
@@ -41,6 +43,7 @@ public class JsonBuilder {
 				1234534L, -1234534L, state);
 
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
 		String json = "";
 		try {
 			json = mapper.writeValueAsString(address);
