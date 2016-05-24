@@ -96,7 +96,7 @@ public class Event {
 		this.eventEndHour = eventEndHour;
 		this.limitGuests = limitGuests;
 		if (this.eventTypeAccess.getTypeAccess().equals("Público")) {
-			this.hiddenEvent = Boolean.TRUE;
+			this.hiddenEvent = Boolean.FALSE;
 		}
 		this.canSendInviteExternal = canSendInviteExternal;
 		this.eventForFree = eventForFree;
