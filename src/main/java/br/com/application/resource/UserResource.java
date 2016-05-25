@@ -20,7 +20,7 @@ import br.com.application.exception.ErrorRepositoryException;
 import com.google.common.collect.Lists;
 
 @RestController
-@RequestMapping("/invviteme/data")
+@RequestMapping("/invviteme/user")
 public class UserResource {
 
 	private Logger logger = Logger.getLogger(UserResource.class);
@@ -28,7 +28,7 @@ public class UserResource {
 	@Autowired
 	private UserBusiness userBusiness;
 
-	@RequestMapping(value = "user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
 		Users userCreated = null;
 		try {

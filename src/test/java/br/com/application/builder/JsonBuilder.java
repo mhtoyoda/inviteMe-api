@@ -39,9 +39,9 @@ public class JsonBuilder {
     }
 
     public String builderAddress() {
-        State state = new State("São Paulo", "Brasil");
+        State state = new State("Sao Paulo", "Brasil");
         state.setId(25);
-        AddressEvent address = new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "São Paulo", 1234534L, -1234534L, state);
+        AddressEvent address = new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "Sao Paulo", 1234534L, -1234534L, state);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -62,19 +62,21 @@ public class JsonBuilder {
         Users owner =
                         new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F',
                                         statusType);
+        owner.setId(1);
 
         EventTypeAccess eventTypeAccess = new EventTypeAccess("Publico");
         eventTypeAccess.setId(1);
 
         EventType eventType = new EventType("Curso", statusType);
+        eventType.setId(2);
 
-        State state = new State("São Paulo", "Brasil");
+        State state = new State("Sao Paulo", "Brasil");
         state.setId(25);
         AddressEvent addressEvent =
-                        new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "São Paulo", 1234534L, -1234534L, state);
+                        new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "Sao Paulo", 1234534L, -1234534L, state);
 
         Event event =
-                        new Event(owner, eventTypeAccess, eventType, "Evento do Ano", "Evento para Confraternizar o sucesso do Invvite me", 1000,
+                        new Event(owner, eventTypeAccess, eventType, "Evento do Ano", "Evento para Confraternizar o sucesso do Invvite me", "observacao", 1000,
                                         addressEvent, statusType, LocalDateTime.of(2016, 6, 20, 19, 30), LocalDateTime.of(2016, 6, 21, 4, 30), true,
                                         true, false);
 

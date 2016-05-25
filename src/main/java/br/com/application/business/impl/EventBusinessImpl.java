@@ -1,6 +1,5 @@
 package br.com.application.business.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +7,8 @@ import org.springframework.stereotype.Component;
 
 import br.com.application.business.EventBusiness;
 import br.com.application.data.StatusData;
-import br.com.application.entity.AddressEvent;
 import br.com.application.entity.Event;
-import br.com.application.entity.EventType;
-import br.com.application.entity.EventTypeAccess;
 import br.com.application.entity.StatusType;
-import br.com.application.entity.Users;
 import br.com.application.exception.ErrorRepositoryException;
 import br.com.application.repository.EventRepository;
 import br.com.application.repository.StatusTypeRepository;
@@ -58,7 +53,7 @@ public class EventBusinessImpl implements EventBusiness {
 			StatusType statusType = statusTypeRepository.findOne(StatusData.PENDENTE.getId());
 			Event eventUpdated = new Event(event.getOwner(), event.getEventTypeAccess(),
                             	            event.getEventType(), event.getTitle(), event.getDescription(),
-                            	            event.getLimitGuests(), event.getAddressEvent(),
+                            	            event.getObservation(), event.getLimitGuests(), event.getAddressEvent(),
                             	            statusType, event.getEventInitHour(),
                             	            event.getEventEndHour(), true,
                             	            event.isCanSendInviteExternal(), event.isEventForFree());
