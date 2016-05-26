@@ -20,7 +20,7 @@ public class Event {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_owner")
 	private Users owner;
 
 	@ManyToOne
@@ -36,6 +36,9 @@ public class Event {
 
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "observation")
+	private String observation;
 
 	@Column(name = "event_for_free")
 	private boolean eventForFree;
@@ -70,7 +73,7 @@ public class Event {
 	private StatusType statusType;
 	
 	@Column(name = "date_updated")
-	private LocalDate dateUpdated;
+	private LocalDateTime dateUpdated;
 	
 	/**
 	 * Default Constructor only use JacksonMapper
@@ -81,7 +84,7 @@ public class Event {
 
 	public Event(Users owner, EventTypeAccess eventTypeAccess,
 			EventType eventType, String title, String description,
-			Integer limitGuests, AddressEvent addressEvent,
+			String observation, Integer limitGuests, AddressEvent addressEvent,
 			StatusType statusType, LocalDateTime eventInitHour,
 			LocalDateTime eventEndHour, boolean ageOfCensorship,
 			boolean canSendInviteExternal, boolean eventForFree) {
@@ -91,6 +94,7 @@ public class Event {
 		this.eventType = eventType;
 		this.title = title;
 		this.description = description;
+		this.observation = observation;
 		this.eventDate = LocalDate.now();
 		this.eventInitHour = eventInitHour;
 		this.eventEndHour = eventEndHour;
@@ -102,7 +106,7 @@ public class Event {
 		this.eventForFree = eventForFree;
 		this.addressEvent = addressEvent;
 		this.statusType = statusType;
-		this.dateUpdated = LocalDate.now();
+		this.dateUpdated = LocalDateTime.now();
 	}
 
 	public void setId(Integer id) {
@@ -133,9 +137,13 @@ public class Event {
 		return description;
 	}
 
+	public String getObservation() {
+		return observation;
+	}
+	
 	public void alterVisibilityEvent(boolean isHidden){
 		this.hiddenEvent = isHidden;
-		this.dateUpdated = LocalDate.now();
+		this.dateUpdated = LocalDateTime.now();
 	}
 	
 	public boolean isHiddenEvent() {
@@ -144,7 +152,7 @@ public class Event {
 
 	public void allowSendInviteExternal(boolean allow){
 		this.canSendInviteExternal = allow;
-		this.dateUpdated = LocalDate.now();
+		this.dateUpdated = LocalDateTime.now();
 	}
 	
 	public boolean isCanSendInviteExternal() {
@@ -155,7 +163,7 @@ public class Event {
 		this.eventDate = eventDate;
 		this.eventInitHour = eventInitHour;
 		this.eventEndHour = eventEndHour;
-		this.dateUpdated = LocalDate.now();
+		this.dateUpdated = LocalDateTime.now();
 	}
 	
 	public LocalDate getEventDate() {
@@ -221,6 +229,8 @@ public class Event {
 		result = prime * result
 				+ ((limitGuests == null) ? 0 : limitGuests.hashCode());
 		result = prime * result + minimumAge;
+		result = prime * result
+				+ ((observation == null) ? 0 : observation.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result
 				+ ((statusType == null) ? 0 : statusType.hashCode());
@@ -295,6 +305,11 @@ public class Event {
 			return false;
 		if (minimumAge != other.minimumAge)
 			return false;
+		if (observation == null) {
+			if (other.observation != null)
+				return false;
+		} else if (!observation.equals(other.observation))
+			return false;
 		if (owner == null) {
 			if (other.owner != null)
 				return false;
@@ -317,13 +332,14 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", owner=" + owner + ", eventTypeAccess="
 				+ eventTypeAccess + ", eventType=" + eventType + ", title="
-				+ title + ", description=" + description + ", eventForFree="
-				+ eventForFree + ", hiddenEvent=" + hiddenEvent
-				+ ", canSendInviteExternal=" + canSendInviteExternal
-				+ ", minimumAge=" + minimumAge + ", eventDate=" + eventDate
-				+ ", eventInitHour=" + eventInitHour + ", eventEndHour="
-				+ eventEndHour + ", limitGuests=" + limitGuests
-				+ ", addressEvent=" + addressEvent + ", statusType="
-				+ statusType + ", dateUpdated=" + dateUpdated + "]";
+				+ title + ", description=" + description + ", observation="
+				+ observation + ", eventForFree=" + eventForFree
+				+ ", hiddenEvent=" + hiddenEvent + ", canSendInviteExternal="
+				+ canSendInviteExternal + ", minimumAge=" + minimumAge
+				+ ", eventDate=" + eventDate + ", eventInitHour="
+				+ eventInitHour + ", eventEndHour=" + eventEndHour
+				+ ", limitGuests=" + limitGuests + ", addressEvent="
+				+ addressEvent + ", statusType=" + statusType
+				+ ", dateUpdated=" + dateUpdated + "]";
 	}
 }
