@@ -83,8 +83,15 @@ public class EventBusinessImpl implements EventBusiness {
     }
 
     @Override
-    public void delete(Event event) throws ErrorRepositoryException {
-        // TODO Auto-generated method stub
-        
-    }
+	public void delete(Event event) throws ErrorRepositoryException{
+	    Event eventDeleted;
+        try {
+        	eventDeleted = findOne(event.getId());
+            if(eventDeleted != null){
+                eventRepository.delete(eventDeleted);   
+            }
+        } catch (ErrorRepositoryException e) {
+            throw new ErrorRepositoryException(e.getMessage());
+        }
+	}
 }

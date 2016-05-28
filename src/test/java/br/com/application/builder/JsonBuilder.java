@@ -24,9 +24,8 @@ public class JsonBuilder {
     public String builderUser() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         StatusType statusType = new StatusType(StatusData.PENDENTE);
         String password = PasswordManager.encrypt("admin123@");
-        Users user =
-                        new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F',
-                                        statusType);
+        Users user = new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F', statusType);
+        
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         String json = "";
@@ -59,9 +58,7 @@ public class JsonBuilder {
         StatusType statusType = new StatusType(StatusData.PENDENTE);
         String password = PasswordManager.encrypt("admin123@");
 
-        Users owner =
-                        new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F',
-                                        statusType);
+        Users owner = new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F', statusType);
         owner.setId(1);
 
         EventTypeAccess eventTypeAccess = new EventTypeAccess("Publico");
@@ -72,13 +69,12 @@ public class JsonBuilder {
 
         State state = new State("Sao Paulo", "Brasil");
         state.setId(25);
-        AddressEvent addressEvent =
-                        new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "Sao Paulo", 1234534L, -1234534L, state);
-
-        Event event =
-                        new Event(owner, eventTypeAccess, eventType, "Evento do Ano", "Evento para Confraternizar o sucesso do Invvite me", "observacao", 1000,
-                                        addressEvent, statusType, LocalDateTime.of(2016, 6, 20, 19, 30), LocalDateTime.of(2016, 6, 21, 4, 30), true,
-                                        true, false);
+        
+        AddressEvent addressEvent = new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "Sao Paulo", 1234534L, -1234534L, state);
+        addressEvent.setId(1);
+        
+        Event event = new Event(owner, eventTypeAccess, eventType, "Evento do Ano", "Evento para Confraternizar o sucesso do Invvite me", "observacao", 1000,
+                                addressEvent, statusType, LocalDateTime.of(2016, 6, 20, 19, 30), LocalDateTime.of(2016, 6, 21, 4, 30), true, true, false);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());

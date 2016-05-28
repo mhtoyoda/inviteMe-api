@@ -98,6 +98,7 @@ public class Event {
 		this.eventDate = LocalDate.now();
 		this.eventInitHour = eventInitHour;
 		this.eventEndHour = eventEndHour;
+		this.dateUpdated = LocalDateTime.now();
 		this.limitGuests = limitGuests;
 		if (this.eventTypeAccess.getTypeAccess().equals("Público")) {
 			this.hiddenEvent = Boolean.FALSE;
@@ -106,7 +107,6 @@ public class Event {
 		this.eventForFree = eventForFree;
 		this.addressEvent = addressEvent;
 		this.statusType = statusType;
-		this.dateUpdated = LocalDateTime.now();
 	}
 
 	public void setId(Integer id) {
@@ -200,6 +200,10 @@ public class Event {
 
 	public StatusType getStatusType() {
 		return statusType;
+	}
+
+	public LocalDateTime getDateUpdated() {
+		return dateUpdated;
 	}
 
 	@Override
