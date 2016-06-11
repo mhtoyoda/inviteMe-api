@@ -7,9 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "user_guest_unified")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "UserGuestUnified", propOrder = {
+        "id",
+        "user",
+        "event",
+        "amount"
+}, namespace = "http://invviteme.com/domain")
 public class UserGuestUnified {
 
     @Id

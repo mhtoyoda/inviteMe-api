@@ -10,9 +10,39 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import br.com.application.converter.LocalDateConverterXsd;
+import br.com.application.converter.LocalDateTimeConverterXsd;
 
 @Entity
 @Table(name = "event")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Event", propOrder = {
+        "id",
+        "owner",
+        "eventTypeAccess",
+        "eventType",
+        "title",
+        "description",
+        "observation",
+        "eventForFree",
+        "hiddenEvent",
+        "canSendInviteExternal",
+        "minimumAge",
+        "eventDate",
+        "eventInitHour",
+        "eventEndHour",
+        "limitGuests",
+        "addressEvent",
+        "statusType",
+        "dateUpdated"
+}, namespace = "http://invviteme.com/domain")
 public class Event {
 
 	@Id
@@ -52,12 +82,21 @@ public class Event {
 	@Column(name = "minimum_age")
 	private int minimumAge;
 
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
+    @XmlSchemaType(name = "date")
 	@Column(name = "eventdate")
 	private LocalDate eventDate;
 
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
+    @XmlSchemaType(name = "dateTime")
 	@Column(name = "event_init_hour")
 	private LocalDateTime eventInitHour;
 
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
+    @XmlSchemaType(name = "dateTime")
 	@Column(name = "event_end_hour")
 	private LocalDateTime eventEndHour;
 
@@ -72,6 +111,9 @@ public class Event {
 	@JoinColumn(name = "id_statustype")
 	private StatusType statusType;
 	
+	@XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
+    @XmlSchemaType(name = "dateTime")
 	@Column(name = "date_updated")
 	private LocalDateTime dateUpdated;
 	

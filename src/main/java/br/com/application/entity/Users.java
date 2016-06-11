@@ -10,9 +10,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import br.com.application.converter.LocalDateConverterXsd;
 
 @Entity
 @Table(name = "users")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Users", propOrder = {
+        "id",
+        "name",
+        "lastName",
+        "phoneNumber",
+        "email",
+        "gender",
+        "password",
+        "statusType",
+        "dateUpdated",
+        "birthday",
+        "admin"
+}, namespace = "http://invviteme.com/domain")
 public class Users implements Serializable {
 
     /**
@@ -46,9 +68,15 @@ public class Users implements Serializable {
     @JoinColumn(name = "id_statustype")
     private StatusType statusType;
 
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
+    @XmlSchemaType(name = "date")
     @Column(name = "date_updated")
     private LocalDate dateUpdated;
     
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
+    @XmlSchemaType(name = "date")
     @Column(name = "date_birthday")
     private LocalDate birthday;
 	

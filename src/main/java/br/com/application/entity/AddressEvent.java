@@ -9,9 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "address_event")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AddressEvent", propOrder = {
+        "id",
+        "placeName",
+        "streetName",
+        "number",
+        "complement",
+        "zipCode",
+        "cityName",
+        "latitude",
+        "longitude",
+        "state"
+}, namespace = "http://invviteme.com/domain")
 public class AddressEvent implements Serializable {
 
 	/**

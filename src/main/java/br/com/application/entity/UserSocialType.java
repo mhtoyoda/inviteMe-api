@@ -10,10 +10,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import br.com.application.converter.LocalDateConverterXsd;
 
 
 @Entity
 @Table(name = "user_socialtype")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "UserSocialType", propOrder = {
+        "id",
+        "user",
+        "socialType",
+        "status",        
+        "dateUpdated"
+}, namespace = "http://invviteme.com/domain")
 public class UserSocialType {
     
     @Id
@@ -31,6 +47,9 @@ public class UserSocialType {
 	@Column(name = "status")
 	private Boolean status;
 	
+	@XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
+    @XmlSchemaType(name = "date")
 	@Column(name = "date_updated")
 	private LocalDate dateUpdated;
 	

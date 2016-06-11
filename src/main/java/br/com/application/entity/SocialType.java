@@ -5,9 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "socialtype")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SocialType", propOrder = {
+        "id",
+        "name"
+}, namespace = "http://invviteme.com/domain")
 public class SocialType {
 	
 	@Id

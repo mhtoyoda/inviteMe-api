@@ -4,15 +4,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 import br.com.application.data.StatusData;
 
 @Entity
 @Table(name = "statustype")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "StatusType", propOrder = {
+        "id",
+        "description"
+}, namespace = "http://invviteme.com/domain")
 public class StatusType {
 	
 	@Id
 	private Integer id;
+	
 	@Column(name = "description")
 	private String description;
 	

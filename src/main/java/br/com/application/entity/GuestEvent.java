@@ -9,9 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import br.com.application.converter.LocalDateTimeConverterXsd;
 
 @Entity
 @Table(name = "guest_event")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "GuestEvent", propOrder = {
+        "id",
+        "event",
+        "user",
+        "attendanceConfirmed",
+        "timeSentToken",
+        "token",
+        "dateAttendanceConfirmed"
+}, namespace = "http://invviteme.com/domain")
 public class GuestEvent {
 
     @Id
@@ -29,12 +47,18 @@ public class GuestEvent {
     @Column(name = "attendance_confirmed")
     private Boolean attendanceConfirmed;
 
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
+    @XmlSchemaType(name = "dateTime")
     @Column(name = "time_sent_token")
     private LocalDateTime timeSentToken;
 
     @Column(name = "token")
     private String token;
     
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
+    @XmlSchemaType(name = "dateTime")
     @Column(name = "date_attendance_confirmed")
     private LocalDateTime dateAttendanceConfirmed;
 

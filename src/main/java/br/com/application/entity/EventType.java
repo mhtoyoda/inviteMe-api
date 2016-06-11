@@ -7,9 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "eventtype")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "EventType", propOrder = {
+        "id",
+        "category",
+        "statusType"
+}, namespace = "http://invviteme.com/domain")
 public class EventType {
 
     @Id
@@ -18,21 +27,22 @@ public class EventType {
 
     @Column(name = "category")
     private String category;
+    
+	@ManyToOne
+	@JoinColumn(name = "id_statustype")
+	private StatusType statusType;
 
-    /**
+	/**
 	 * Default Constructor only use JacksonMapper
 	 */
 	@Deprecated
-    public EventType() {}
-    
-    public EventType(String category, StatusType statusType) {
+	public EventType() {}
+
+	public EventType(String category, StatusType statusType) {
 		this.category = category;
 		this.statusType = statusType;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "id_statustype")
-    private StatusType statusType;
 
     public Integer getId() {
         return id;
