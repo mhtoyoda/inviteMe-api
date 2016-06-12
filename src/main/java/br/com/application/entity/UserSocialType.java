@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import br.com.application.converter.LocalDateConverterXsd;
 
 
@@ -23,17 +25,18 @@ import br.com.application.converter.LocalDateConverterXsd;
 @Table(name = "user_socialtype")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UserSocialType", propOrder = {
-        "id",
+        "userSocialTypeId",
         "user",
         "socialType",
         "status",        
         "dateUpdated"
 }, namespace = "http://invviteme.com/domain")
-public class UserSocialType {
+public class UserSocialType  extends ResourceSupport {
     
     @Id
     @GeneratedValue
-	private Integer id;
+    @Column(name = "id")
+	private Integer userSocialTypeId;
     
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -64,15 +67,15 @@ public class UserSocialType {
 		this.dateUpdated = LocalDate.now();
 	}
 
-	public Integer getId() {
-        return id;
-    }
+    public Integer getUserSocialTypeId() {
+		return userSocialTypeId;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setUserSocialTypeId(Integer userSocialTypeId) {
+		this.userSocialTypeId = userSocialTypeId;
+	}
 
-    public Users getUser() {
+	public Users getUser() {
 		return user;
 	}
 
@@ -98,7 +101,7 @@ public class UserSocialType {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((userSocialTypeId == null) ? 0 : userSocialTypeId.hashCode());
         result = prime * result + ((socialType == null) ? 0 : socialType.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((user == null) ? 0 : user.hashCode());
@@ -114,9 +117,9 @@ public class UserSocialType {
         if (dateUpdated == null) {
             if (other.dateUpdated != null) return false;
         } else if (!dateUpdated.equals(other.dateUpdated)) return false;
-        if (id == null) {
-            if (other.id != null) return false;
-        } else if (!id.equals(other.id)) return false;
+        if (userSocialTypeId == null) {
+            if (other.userSocialTypeId != null) return false;
+        } else if (!userSocialTypeId.equals(other.userSocialTypeId)) return false;
         if (socialType == null) {
             if (other.socialType != null) return false;
         } else if (!socialType.equals(other.socialType)) return false;
@@ -131,7 +134,7 @@ public class UserSocialType {
 
     @Override
     public String toString() {
-        return "UserSocialType [id=" + id + ", user=" + user + ", socialType=" + socialType + ", status=" + status + ", dateUpdated=" + dateUpdated
+        return "UserSocialType [userSocialTypeId=" + userSocialTypeId + ", user=" + user + ", socialType=" + socialType + ", status=" + status + ", dateUpdated=" + dateUpdated
                         + "]";
     }
 }

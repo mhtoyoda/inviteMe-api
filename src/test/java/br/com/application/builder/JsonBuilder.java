@@ -62,7 +62,7 @@ public class JsonBuilder {
         owner.setId(1);
 
         EventTypeAccess eventTypeAccess = new EventTypeAccess("Publico");
-        eventTypeAccess.setId(1);
+        eventTypeAccess.setEventTypeAccessId(1);
 
         EventType eventType = new EventType("Curso", statusType);
         eventType.setId(2);
@@ -71,7 +71,7 @@ public class JsonBuilder {
         state.setId(25);
         
         AddressEvent addressEvent = new AddressEvent("Vila Country", "Av. Barra Funda", 35, "Terreo", "123456", "Sao Paulo", 1234534L, -1234534L, state);
-        addressEvent.setId(1);
+        addressEvent.setAddressEventId(1);
         
         Event event = new Event(owner, eventTypeAccess, eventType, "Evento do Ano", "Evento para Confraternizar o sucesso do Invvite me", "observacao", 1000,
                                 addressEvent, statusType, LocalDateTime.of(2016, 6, 20, 19, 30), LocalDateTime.of(2016, 6, 21, 4, 30), true, true, false);

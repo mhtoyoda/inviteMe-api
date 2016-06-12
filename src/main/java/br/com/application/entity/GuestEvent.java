@@ -15,13 +15,15 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import br.com.application.converter.LocalDateTimeConverterXsd;
 
 @Entity
 @Table(name = "guest_event")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GuestEvent", propOrder = {
-        "id",
+        "guestEventId",
         "event",
         "user",
         "attendanceConfirmed",
@@ -29,11 +31,12 @@ import br.com.application.converter.LocalDateTimeConverterXsd;
         "token",
         "dateAttendanceConfirmed"
 }, namespace = "http://invviteme.com/domain")
-public class GuestEvent {
+public class GuestEvent extends ResourceSupport {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    @Column(name = "id")
+    private Integer guestEventId;
 
     @ManyToOne
     @JoinColumn(name = "id_event")
@@ -74,15 +77,15 @@ public class GuestEvent {
 		this.token = generateToken(event, user);
 	}
 
-	public Integer getId() {
-        return id;
-    }
+    public Integer getGuestEventId() {
+		return guestEventId;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-   
-    public Event getEvent() {
+	public void setGuestEventId(Integer guestEventId) {
+		this.guestEventId = guestEventId;
+	}
+
+	public Event getEvent() {
         return event;
     }
 
@@ -129,7 +132,7 @@ public class GuestEvent {
 				+ ((dateAttendanceConfirmed == null) ? 0
 						: dateAttendanceConfirmed.hashCode());
 		result = prime * result + ((event == null) ? 0 : event.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((guestEventId == null) ? 0 : guestEventId.hashCode());
 		result = prime * result
 				+ ((timeSentToken == null) ? 0 : timeSentToken.hashCode());
 		result = prime * result + ((token == null) ? 0 : token.hashCode());
@@ -162,10 +165,10 @@ public class GuestEvent {
 				return false;
 		} else if (!event.equals(other.event))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (guestEventId == null) {
+			if (other.guestEventId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!guestEventId.equals(other.guestEventId))
 			return false;
 		if (timeSentToken == null) {
 			if (other.timeSentToken != null)
@@ -187,7 +190,7 @@ public class GuestEvent {
 
 	@Override
 	public String toString() {
-		return "GuestEvent [id=" + id + ", event=" + event + ", user=" + user
+		return "GuestEvent [guestEventId=" + guestEventId + ", event=" + event + ", user=" + user
 				+ ", attendanceConfirmed=" + attendanceConfirmed
 				+ ", timeSentToken=" + timeSentToken + ", token=" + token
 				+ ", dateAttendanceConfirmed=" + dateAttendanceConfirmed + "]";

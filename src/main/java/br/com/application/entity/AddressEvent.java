@@ -13,11 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.springframework.hateoas.ResourceSupport;
+
 @Entity
 @Table(name = "address_event")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddressEvent", propOrder = {
-        "id",
+        "addressEventId",
         "placeName",
         "streetName",
         "number",
@@ -28,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
         "longitude",
         "state"
 }, namespace = "http://invviteme.com/domain")
-public class AddressEvent implements Serializable {
+public class AddressEvent extends ResourceSupport implements Serializable {
 
 	/**
 	 * 
@@ -37,7 +39,8 @@ public class AddressEvent implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	@Column(name = "id")
+	private Integer addressEventId;
 
 	@Column(name = "placename")
 	private String placeName;
@@ -88,13 +91,13 @@ public class AddressEvent implements Serializable {
 		this.latitude = latitude;
 		this.state = state;
 	}
-	
-	public void setId(Integer id) {
-		this.id = id;
+
+	public Integer getAddressEventId() {
+		return addressEventId;
 	}
-	
-	public Integer getId() {
-		return id;
+
+	public void setAddressEventId(Integer addressEventId) {
+		this.addressEventId = addressEventId;
 	}
 
 	public String getPlaceName() {
@@ -141,7 +144,7 @@ public class AddressEvent implements Serializable {
 				+ ((cityName == null) ? 0 : cityName.hashCode());
 		result = prime * result
 				+ ((complement == null) ? 0 : complement.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((addressEventId == null) ? 0 : addressEventId.hashCode());
 		result = prime * result
 				+ ((latitude == null) ? 0 : latitude.hashCode());
 		result = prime * result
@@ -175,10 +178,10 @@ public class AddressEvent implements Serializable {
 				return false;
 		} else if (!complement.equals(other.complement))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (addressEventId == null) {
+			if (other.addressEventId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!addressEventId.equals(other.addressEventId))
 			return false;
 		if (latitude == null) {
 			if (other.latitude != null)
@@ -220,7 +223,7 @@ public class AddressEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AddressEvent [id=" + id + ", placeName=" + placeName
+		return "AddressEvent [id=" + addressEventId + ", placeName=" + placeName
 				+ ", streetName=" + streetName + ", number=" + number
 				+ ", complement=" + complement + ", zipCode=" + zipCode
 				+ ", cityName=" + cityName + ", longitude=" + longitude

@@ -9,18 +9,21 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.springframework.hateoas.ResourceSupport;
+
 @Entity
 @Table(name = "eventtype_access")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventTypeAccess", propOrder = {
-        "id",
+        "eventTypeAccessId",
         "typeAccess"
 }, namespace = "http://invviteme.com/domain")
-public class EventTypeAccess {
+public class EventTypeAccess extends ResourceSupport {
 	
 	@Id
     @GeneratedValue
-	private Integer id;
+    @Column(name = "id")
+	private Integer eventTypeAccessId;
 	
 	@Column(name = "type_access")
 	private String typeAccess;
@@ -35,12 +38,12 @@ public class EventTypeAccess {
 		this.typeAccess = typeAccess;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getEventTypeAccessId() {
+		return eventTypeAccessId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setEventTypeAccessId(Integer eventTypeAccessId) {
+		this.eventTypeAccessId = eventTypeAccessId;
 	}
 
 	public String getTypeAccess() {
@@ -52,7 +55,7 @@ public class EventTypeAccess {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((eventTypeAccessId == null) ? 0 : eventTypeAccessId.hashCode());
 		result = prime * result
 				+ ((typeAccess == null) ? 0 : typeAccess.hashCode());
 		return result;
@@ -67,10 +70,10 @@ public class EventTypeAccess {
 		if (getClass() != obj.getClass())
 			return false;
 		EventTypeAccess other = (EventTypeAccess) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (eventTypeAccessId == null) {
+			if (other.eventTypeAccessId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!eventTypeAccessId.equals(other.eventTypeAccessId))
 			return false;
 		if (typeAccess == null) {
 			if (other.typeAccess != null)
@@ -82,6 +85,6 @@ public class EventTypeAccess {
 
     @Override
     public String toString() {
-        return "EventTypeAccess [id=" + id + ", typeAccess=" + typeAccess + "]";
+        return "EventTypeAccess [eventTypeAccessId=" + eventTypeAccessId + ", typeAccess=" + typeAccess + "]";
     }
 }

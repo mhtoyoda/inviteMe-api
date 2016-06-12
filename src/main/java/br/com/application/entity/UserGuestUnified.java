@@ -11,20 +11,23 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.springframework.hateoas.ResourceSupport;
+
 @Entity
 @Table(name = "user_guest_unified")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UserGuestUnified", propOrder = {
-        "id",
+        "userGuestUnifiedId",
         "user",
         "event",
         "amount"
 }, namespace = "http://invviteme.com/domain")
-public class UserGuestUnified {
+public class UserGuestUnified extends ResourceSupport {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    @Column(name = "id")
+    private Integer userGuestUnifiedId;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -48,16 +51,16 @@ public class UserGuestUnified {
 		this.event = event;
 		this.amount = amount;
 	}
+    
+    public Integer getUserGuestUnifiedId() {
+		return userGuestUnifiedId;
+	}
 
-	public Integer getId() {
-        return id;
-    }
+	public void setUserGuestUnifiedId(Integer userGuestUnifiedId) {
+		this.userGuestUnifiedId = userGuestUnifiedId;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Users getUser() {
+	public Users getUser() {
         return user;
     }
 
@@ -75,7 +78,7 @@ public class UserGuestUnified {
         int result = 1;
         result = prime * result + ((amount == null) ? 0 : amount.hashCode());
         result = prime * result + ((event == null) ? 0 : event.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((userGuestUnifiedId == null) ? 0 : userGuestUnifiedId.hashCode());
         result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
@@ -92,9 +95,9 @@ public class UserGuestUnified {
         if (event == null) {
             if (other.event != null) return false;
         } else if (!event.equals(other.event)) return false;
-        if (id == null) {
-            if (other.id != null) return false;
-        } else if (!id.equals(other.id)) return false;
+        if (userGuestUnifiedId == null) {
+            if (other.userGuestUnifiedId != null) return false;
+        } else if (!userGuestUnifiedId.equals(other.userGuestUnifiedId)) return false;
         if (user == null) {
             if (other.user != null) return false;
         } else if (!user.equals(other.user)) return false;
@@ -103,6 +106,6 @@ public class UserGuestUnified {
 
     @Override
     public String toString() {
-        return "UserGuestUnified [id=" + id + ", user=" + user + ", event=" + event + ", amount=" + amount + "]";
+        return "UserGuestUnified [userGuestUnifiedId=" + userGuestUnifiedId + ", user=" + user + ", event=" + event + ", amount=" + amount + "]";
     }
 }

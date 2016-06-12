@@ -30,7 +30,7 @@ public class AddressBusinessImpl implements AddressBusiness{
    
 	@Override
 	public boolean isAddressExists(AddressEvent addressEvent) {
-		return addressRepository.exists(addressEvent.getId());
+		return addressRepository.exists(addressEvent.getAddressEventId());
 	}
 
     @Override
@@ -46,7 +46,7 @@ public class AddressBusinessImpl implements AddressBusiness{
 	public void delete(AddressEvent address) throws ErrorRepositoryException{
 	    AddressEvent addressDeleted;
         try {
-            addressDeleted = findOne(address.getId());
+            addressDeleted = findOne(address.getAddressEventId());
             if(addressDeleted != null){
                 addressRepository.delete(addressDeleted);   
             }
@@ -68,7 +68,7 @@ public class AddressBusinessImpl implements AddressBusiness{
 	@Override
     public AddressEvent updateAddress(AddressEvent address) throws ErrorRepositoryException{
         try{
-            AddressEvent addressFind = findOne(address.getId());
+            AddressEvent addressFind = findOne(address.getAddressEventId());
             if(null == addressFind){
                return null; 
             }
@@ -76,7 +76,7 @@ public class AddressBusinessImpl implements AddressBusiness{
             AddressEvent addressUpdated = new AddressEvent(address.getPlaceName(), address.getStreetName(), address.getNumber(),
             		address.getComplement(), address.getZipCode(), address.getCityName(),
             		address.getLongitude(), address.getLatitude(), state);            
-            addressUpdated.setId(address.getId());                        
+            addressUpdated.setAddressEventId(address.getAddressEventId());                        
             return save(addressUpdated);
         }catch(Exception e){
             throw new ErrorRepositoryException(e.getMessage());
