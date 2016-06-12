@@ -65,7 +65,6 @@ public class GuestEvent extends ResourceSupport {
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
     public GuestEvent(){}
     
     public GuestEvent(Event event, Users user, long daysBeforeEvent) {

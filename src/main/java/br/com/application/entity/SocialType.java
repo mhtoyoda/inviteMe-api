@@ -28,7 +28,6 @@ public class SocialType {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public SocialType(){}
 	
 	public SocialType(String name) {

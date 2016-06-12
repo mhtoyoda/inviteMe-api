@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.springframework.hateoas.ResourceSupport;
 
 import br.com.application.converter.LocalDateConverterXsd;
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "users")
@@ -34,7 +36,8 @@ import br.com.application.converter.LocalDateConverterXsd;
         "statusType",
         "dateUpdated",
         "birthday",
-        "admin"
+        "admin",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class Users extends ResourceSupport implements Serializable {
 
@@ -83,10 +86,12 @@ public class Users extends ResourceSupport implements Serializable {
     @Column(name = "admin")
     private boolean admin;
     
+    @Transient
+    private Message message;
+    
     /**
      * Default Constructor only use JacksonMapper
-     */
-    @Deprecated
+     */    
     public Users(){}    
 	public Users(String name, String lastName, LocalDate birthday, String phoneNumber, String email, String password, char gender, StatusType statusType) {		
 		this.name = name;
@@ -155,6 +160,15 @@ public class Users extends ResourceSupport implements Serializable {
 	public boolean isAdmin() {
 		return admin;
 	}
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

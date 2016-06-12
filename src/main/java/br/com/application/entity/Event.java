@@ -118,7 +118,6 @@ public class Event extends ResourceSupport {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public Event() {
 	}
 

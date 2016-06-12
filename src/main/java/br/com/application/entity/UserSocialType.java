@@ -57,7 +57,6 @@ public class UserSocialType  extends ResourceSupport {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public UserSocialType(){}	
 	
     public UserSocialType(Users user, SocialType socialType, Date dateUpdated) {		

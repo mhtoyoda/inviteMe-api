@@ -36,7 +36,6 @@ public class EventType {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public EventType() {}
 
 	public EventType(String category, StatusType statusType) {

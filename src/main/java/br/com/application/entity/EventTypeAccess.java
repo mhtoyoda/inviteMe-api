@@ -31,7 +31,6 @@ public class EventTypeAccess extends ResourceSupport {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public EventTypeAccess() {}
 	
 	public EventTypeAccess(String typeAccess) {

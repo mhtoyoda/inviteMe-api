@@ -43,7 +43,6 @@ public class UserGuestUnified extends ResourceSupport {
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
     public UserGuestUnified(){}
 	
     public UserGuestUnified(Users user, Event event, Integer amount) {

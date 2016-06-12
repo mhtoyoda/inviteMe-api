@@ -73,7 +73,6 @@ public class AddressEvent extends ResourceSupport implements Serializable {
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
 	public AddressEvent() {
 	}
 

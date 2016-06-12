@@ -32,7 +32,6 @@ public class State {
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
-	@Deprecated
     public State(){}
     
 	public State(String stateName, String country) {
