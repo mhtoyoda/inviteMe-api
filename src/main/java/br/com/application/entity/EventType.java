@@ -7,9 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "eventtype")
@@ -17,7 +20,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EventType", propOrder = {
         "id",
         "category",
-        "statusType"
+        "statusType",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class EventType {
 
@@ -33,6 +37,9 @@ public class EventType {
 	@JoinColumn(name = "id_statustype")
 	private StatusType statusType;
 
+	@Transient
+    private Message message;
+	
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
@@ -59,6 +66,14 @@ public class EventType {
     public StatusType getStatusType() {
         return statusType;
     }
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
+	}
 
     @Override
     public int hashCode() {

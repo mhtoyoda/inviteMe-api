@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "state")
@@ -15,7 +18,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "State", propOrder = {
         "id",
         "stateName",
-        "country"
+        "country",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class State {
 	
@@ -29,6 +33,9 @@ public class State {
     @Column(name = "country")
 	private String country;
 
+    @Transient
+    private Message message;
+    
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
@@ -53,6 +60,14 @@ public class State {
 
 	public String getCountry() {
 		return country;
+	}
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
 	}
 
 	@Override

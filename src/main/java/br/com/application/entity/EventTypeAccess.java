@@ -5,18 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import br.com.application.response.Message;
+
 @Entity
 @Table(name = "eventtype_access")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventTypeAccess", propOrder = {
         "eventTypeAccessId",
-        "typeAccess"
+        "typeAccess",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class EventTypeAccess extends ResourceSupport {
 	
@@ -27,6 +31,9 @@ public class EventTypeAccess extends ResourceSupport {
 	
 	@Column(name = "type_access")
 	private String typeAccess;
+	
+	@Transient
+    private Message message;
 	
 	/**
 	 * Default Constructor only use JacksonMapper
@@ -48,7 +55,14 @@ public class EventTypeAccess extends ResourceSupport {
 	public String getTypeAccess() {
 		return typeAccess;
 	}
-
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
+	}
 
 	@Override
 	public int hashCode() {

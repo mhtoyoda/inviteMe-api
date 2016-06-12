@@ -9,11 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springframework.hateoas.ResourceSupport;
+
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "address_event")
@@ -28,7 +31,8 @@ import org.springframework.hateoas.ResourceSupport;
         "cityName",
         "latitude",
         "longitude",
-        "state"
+        "state",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class AddressEvent extends ResourceSupport implements Serializable {
 
@@ -70,6 +74,9 @@ public class AddressEvent extends ResourceSupport implements Serializable {
 	@JoinColumn(name = "id_state")
 	private State state;
 
+	@Transient
+    private Message message;
+	
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
@@ -133,6 +140,14 @@ public class AddressEvent extends ResourceSupport implements Serializable {
 
 	public State getState() {
 		return state;
+	}
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -18,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.springframework.hateoas.ResourceSupport;
 
 import br.com.application.converter.LocalDateTimeConverterXsd;
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "guest_event")
@@ -29,7 +31,8 @@ import br.com.application.converter.LocalDateTimeConverterXsd;
         "attendanceConfirmed",
         "timeSentToken",
         "token",
-        "dateAttendanceConfirmed"
+        "dateAttendanceConfirmed",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class GuestEvent extends ResourceSupport {
 
@@ -62,6 +65,9 @@ public class GuestEvent extends ResourceSupport {
     @Column(name = "date_attendance_confirmed")
     private LocalDateTime dateAttendanceConfirmed;
 
+    @Transient
+    private Message message;
+    
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
@@ -116,6 +122,14 @@ public class GuestEvent extends ResourceSupport {
     
     public LocalDateTime getDateAttendanceConfirmed() {
 		return dateAttendanceConfirmed;
+	}
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
 	}
 
 	@Override

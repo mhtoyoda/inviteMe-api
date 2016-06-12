@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.springframework.hateoas.ResourceSupport;
 
 import br.com.application.converter.LocalDateConverterXsd;
+import br.com.application.response.Message;
 
 
 @Entity
@@ -29,7 +31,8 @@ import br.com.application.converter.LocalDateConverterXsd;
         "user",
         "socialType",
         "status",        
-        "dateUpdated"
+        "dateUpdated",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class UserSocialType  extends ResourceSupport {
     
@@ -54,6 +57,9 @@ public class UserSocialType  extends ResourceSupport {
 	@Column(name = "date_updated")
 	private LocalDate dateUpdated;
 	
+    @Transient
+    private Message message;
+    
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */
@@ -93,6 +99,14 @@ public class UserSocialType  extends ResourceSupport {
 
 	public LocalDate getDateUpdated() {
 		return dateUpdated;
+	}
+	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
 	}
 
 	@Override
