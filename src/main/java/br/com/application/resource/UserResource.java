@@ -1,5 +1,7 @@
 package br.com.application.resource;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -33,6 +35,7 @@ public class UserResource {
 		Users userCreated = null;
 		try {
 			userCreated = userBusiness.save(user);
+			userCreated.add(linkTo(methodOn(UserResource.class, findUserById(userCreated.getUserId()))).withSelfRel());
 			return new ResponseEntity<Users>(userCreated, HttpStatus.OK);
 		} catch (ErrorRepositoryException e) {
 			logger.error("Erro Service: [UserResource][createUSer]-> "+ e.getMessage());

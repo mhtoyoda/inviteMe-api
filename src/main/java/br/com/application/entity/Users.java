@@ -16,13 +16,15 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import br.com.application.converter.LocalDateConverterXsd;
 
 @Entity
 @Table(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Users", propOrder = {
-        "id",
+        "userId",
         "name",
         "lastName",
         "phoneNumber",
@@ -34,7 +36,7 @@ import br.com.application.converter.LocalDateConverterXsd;
         "birthday",
         "admin"
 }, namespace = "http://invviteme.com/domain")
-public class Users implements Serializable {
+public class Users extends ResourceSupport implements Serializable {
 
     /**
 	 * 
@@ -43,7 +45,8 @@ public class Users implements Serializable {
 
 	@Id
     @GeneratedValue
-    private Integer id;
+    @Column(name = "id")
+    private Integer userId;
 
     @Column(name = "name")
     private String name;
@@ -98,14 +101,12 @@ public class Users implements Serializable {
 		this.admin = Boolean.FALSE;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getUserId() {
+		return userId;
 	}
-	
-    public Integer getId() {
-		return id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -165,7 +166,7 @@ public class Users implements Serializable {
 				+ ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + gender;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -205,10 +206,10 @@ public class Users implements Serializable {
 			return false;
 		if (gender != other.gender)
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!userId.equals(other.userId))
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -239,7 +240,7 @@ public class Users implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", lastName=" + lastName
+		return "Users [userId=" + userId + ", name=" + name + ", lastName=" + lastName
 				+ ", phoneNumber=" + phoneNumber + ", email=" + email
 				+ ", gender=" + gender + ", password=" + password
 				+ ", statusType=" + statusType + ", dateUpdated=" + dateUpdated

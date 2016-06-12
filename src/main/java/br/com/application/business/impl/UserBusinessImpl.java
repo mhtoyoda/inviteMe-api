@@ -46,14 +46,14 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users updateUser(Users user) throws ErrorRepositoryException{
 		try{
-			Users userFind = findOne(user.getId());
+			Users userFind = findOne(user.getUserId());
 			if(null == userFind){
 			   return null;	
 			}
 			StatusType statusType = statusTypeRepository.findOne(StatusData.PENDENTE.getId());
 			Users userUpdated = new Users(user.getName(), user.getLastName(), user.getBirthday(), user.getPhoneNumber(),
 									user.getEmail(), user.getPassword(), user.getGender(), statusType);
-			userUpdated.setId(user.getId());
+			userUpdated.setUserId(user.getUserId());
 			return save(userUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
@@ -63,7 +63,7 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users activeUser(Users user) throws ErrorRepositoryException{
 		try{
-			Users userUpdated = findOne(user.getId());
+			Users userUpdated = findOne(user.getUserId());
 			if(null == userUpdated){
 			   return null;	
 			}
@@ -78,7 +78,7 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users inactiveUser(Users user) throws ErrorRepositoryException{
 		try{
-			Users userUpdated = findOne(user.getId());
+			Users userUpdated = findOne(user.getUserId());
 			if(null == userUpdated){
 			   return null;	
 			}
@@ -93,7 +93,7 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users blockUser(Users user) throws ErrorRepositoryException{
 		try{
-			Users userUpdated = findOne(user.getId());
+			Users userUpdated = findOne(user.getUserId());
 			if(null == userUpdated){
 			   return null;	
 			}
@@ -108,7 +108,7 @@ public class UserBusinessImpl implements UserBusiness {
 	@Override
 	public Users alterPasswordUser(Users user, String password) throws ErrorRepositoryException{
 		try{
-			Users userUpdated = findOne(user.getId());
+			Users userUpdated = findOne(user.getUserId());
 			if(null == userUpdated){
 			   return null;	
 			}

@@ -1,5 +1,7 @@
 package br.com.application.resource;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -20,9 +22,9 @@ import br.com.application.exception.ErrorRepositoryException;
 
 @RestController
 @RequestMapping("/invviteme/data")
-public class AddressResource {
+public class AddressEventResource {
 
-    private Logger logger = Logger.getLogger(AddressResource.class);
+    private Logger logger = Logger.getLogger(AddressEventResource.class);
 
     @Autowired
     private AddressBusiness addressBusiness;
@@ -58,6 +60,7 @@ public class AddressResource {
 
         try {
             addressCreated = addressBusiness.save(addressEvent);
+            addressCreated.add(linkTo(methodOn(AddressEvent.class, findAddressById(addressCreated.getAddressEventId()))).withSelfRel());
             return new ResponseEntity<AddressEvent>(addressCreated, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: [AddressResource][createAddress]-> " + e.getMessage());

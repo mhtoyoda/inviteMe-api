@@ -59,7 +59,7 @@ public class JsonBuilder {
         String password = PasswordManager.encrypt("admin123@");
 
         Users owner = new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F', statusType);
-        owner.setId(1);
+        owner.setUserId(1);
 
         EventTypeAccess eventTypeAccess = new EventTypeAccess("Publico");
         eventTypeAccess.setEventTypeAccessId(1);
