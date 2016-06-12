@@ -152,6 +152,7 @@
 						<configuration>
 							<sources>
 								<source>src/main/java/br/com/application/entity</source>
+								<source>src/main/java/br/com/application/response</source>
 							</sources>
 							<transformSchemas>
 								<transformSchema>

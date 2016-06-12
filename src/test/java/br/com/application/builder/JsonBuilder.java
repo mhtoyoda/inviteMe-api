@@ -13,6 +13,7 @@ import br.com.application.entity.EventTypeAccess;
 import br.com.application.entity.State;
 import br.com.application.entity.StatusType;
 import br.com.application.entity.Users;
+import br.com.application.response.Message;
 import br.com.application.security.PasswordManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -25,7 +26,7 @@ public class JsonBuilder {
         StatusType statusType = new StatusType(StatusData.PENDENTE);
         String password = PasswordManager.encrypt("admin123@");
         Users user = new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F', statusType);
-        
+        user.setMessage(new Message());       
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         String json = "";
@@ -60,7 +61,7 @@ public class JsonBuilder {
 
         Users owner = new Users("Ana Carolina", "Da Silva", LocalDate.of(1980, 10, 2), "1190901020", "ana.carolina@teste.com.br", password, 'F', statusType);
         owner.setUserId(1);
-
+        
         EventTypeAccess eventTypeAccess = new EventTypeAccess("Publico");
         eventTypeAccess.setEventTypeAccessId(1);
 

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.application.business.UserBusiness;
 import br.com.application.entity.Users;
 import br.com.application.exception.ErrorRepositoryException;
+import br.com.application.response.Message;
+import br.com.application.response.UserResponseList;
 
 import com.google.common.collect.Lists;
 
@@ -35,57 +37,74 @@ public class UserResource {
 		Users userCreated = null;
 		try {
 			userCreated = userBusiness.save(user);
-			userCreated.add(linkTo(methodOn(UserResource.class, findUserById(userCreated.getUserId()))).withSelfRel());
+			userCreated.add(linkTo(methodOn(UserResource.class).findUserById(userCreated.getUserId())).withSelfRel());			
+			userCreated.setMessage(new Message());
 			return new ResponseEntity<Users>(userCreated, HttpStatus.OK);
 		} catch (ErrorRepositoryException e) {
 			logger.error("Erro Service: [UserResource][createUSer]-> "+ e.getMessage());
+			userCreated = new Users();
+			userCreated.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
 			return new ResponseEntity<Users>(userCreated, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@RequestMapping(value = "user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> findUserById(@PathVariable("id") Integer id) {
 		Users user = null;
 		try {
 			user = userBusiness.findOne(id);
 			if (null == user) {
+				user = new Users();
+				user.setMessage(new Message().addMessage(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase()));
 				return new ResponseEntity<Users>(user, HttpStatus.NO_CONTENT);
 			}
+			user.setMessage(new Message());
 			return new ResponseEntity<Users>(user, HttpStatus.OK);
 		} catch (ErrorRepositoryException e) {
 			logger.error("Erro Service: [UserResource][findUserById]-> "+ e.getMessage());
+			user = new Users();
+			user.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
 			return new ResponseEntity<Users>(user, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@RequestMapping(value = "user", method = RequestMethod.PUT, 
+	@RequestMapping(method = RequestMethod.PUT, 
 					produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
 		Users userUpdated = null;
 		try {
 			userUpdated = userBusiness.updateUser(user);
-			if( null == userUpdated ){
+			if( null == userUpdated ){				
+				user.setMessage(new Message().addMessage(HttpStatus.NOT_MODIFIED.value(), HttpStatus.NOT_MODIFIED.getReasonPhrase()));
 				return new ResponseEntity<Users>(user, HttpStatus.NOT_MODIFIED);
 			}
+			userUpdated.setMessage(new Message());
 			return new ResponseEntity<Users>(userUpdated, HttpStatus.OK);
 		} catch (ErrorRepositoryException e) {
 			logger.error("Erro Service: [UserResource][updateUser]-> "+ e.getMessage());
+			userUpdated = new Users();
+			userUpdated.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
 			return new ResponseEntity<Users>(userUpdated, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@RequestMapping(value = "users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Users>> findAllUsers() {
+	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserResponseList> findAllUsers() {
 		List<Users> list = Lists.newArrayList();
+		UserResponseList userList = new UserResponseList();
 		try {
 			list = userBusiness.listAll();
 			if (list.isEmpty()) {
-				return new ResponseEntity<List<Users>>(list, HttpStatus.NO_CONTENT);
+				userList.setMessage(new Message().addMessage(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase()));
+				return new ResponseEntity<UserResponseList>(userList, HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<List<Users>>(list, HttpStatus.OK);
+			userList.setUsers(list);
+			userList.setMessage(new Message());			
+			return new ResponseEntity<UserResponseList>(userList, HttpStatus.OK);
 		} catch (ErrorRepositoryException e) {
 			logger.error("Erro Service: [UserResource][findAllUsers]-> "+ e.getMessage());
-			return new ResponseEntity<List<Users>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			userList.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
+			return new ResponseEntity<UserResponseList>(userList, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

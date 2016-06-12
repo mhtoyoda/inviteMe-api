@@ -1,8 +1,7 @@
 package br.com.application.resource;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-import java.util.Collections;
-import java.util.List;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.application.business.EventBusiness;
 import br.com.application.entity.Event;
 import br.com.application.exception.ErrorRepositoryException;
+import br.com.application.response.Message;
 
 @RestController
 @RequestMapping("/invviteme/event")
@@ -36,10 +36,13 @@ public class EventResource {
 
         try {
             eventCreated = eventBusiness.save(event);
-            eventCreated.add(linkTo(methodOn(EventResource.class, findEventById(eventCreated.getEventId()))).withSelfRel());
+            eventCreated.add(linkTo(methodOn(EventResource.class).findEventById(eventCreated.getEventId())).withSelfRel());
+            eventCreated.setMessage(new Message());
             return new ResponseEntity<Event>(eventCreated, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: [AddressResource][createAddress]-> " + e.getMessage());
+            eventCreated = new Event();
+            eventCreated.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
             return new ResponseEntity<Event>(eventCreated, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -50,22 +53,18 @@ public class EventResource {
         try {
         	event = eventBusiness.findOne(id);
             if (null == event) {
+            	event = new Event();
+                event.setMessage(new Message().addMessage(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase()));
                 return new ResponseEntity<Event>(event, HttpStatus.NO_CONTENT);
             }
+            event.add(linkTo(methodOn(AddressEventResource.class).findAddressById(event.getAddressEvent().getAddressEventId())).withRel("address"));
+            event.setMessage(new Message());
             return new ResponseEntity<Event>(event, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: EventResource][findEventById]-> " + e.getMessage());
+            event = new Event();
+            event.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
             return new ResponseEntity<Event>(event, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Event>> eventList() {
-        try {
-            List<Event> list = eventBusiness.eventList();
-            return new ResponseEntity<List<Event>>(list, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<List<Event>>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -75,25 +74,35 @@ public class EventResource {
         try {
         	eventUpdated = eventBusiness.updateEvent(event);
             if (null == eventUpdated) {
+            	eventUpdated = new Event();
+            	eventUpdated.setMessage(new Message().addMessage(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase()));
                 return new ResponseEntity<Event>(event, HttpStatus.NOT_MODIFIED);
             }
-            return new ResponseEntity<Event>(event, HttpStatus.OK);
+            eventUpdated.setMessage(new Message());
+            return new ResponseEntity<Event>(eventUpdated, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: [EventResource][updateEvent]-> " + e.getMessage());
-            return new ResponseEntity<Event>(event, HttpStatus.INTERNAL_SERVER_ERROR);
+            eventUpdated = new Event();
+        	eventUpdated.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
+            return new ResponseEntity<Event>(eventUpdated, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteEvent(@PathVariable("id") Integer id) {
+    public ResponseEntity<Event> deleteEvent(@PathVariable("id") Integer id) {
         Event event = null;
         try {
         	event = eventBusiness.findOne(id);
             if (event != null) {
             	eventBusiness.delete(event);
-            }
+            }            
+            event.setMessage(new Message());
+            return new ResponseEntity<Event>(event, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: [EventResource][deleteEvent]-> " + e.getMessage());
+            event = new Event();
+            event.setMessage(new Message().addMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
+            return new ResponseEntity<Event>(event, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
