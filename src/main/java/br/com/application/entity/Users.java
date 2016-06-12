@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -67,14 +66,12 @@ public class Users implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_statustype")
     private StatusType statusType;
-
-    @XmlElement(required = true, type = String.class)
+  
     @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
     @XmlSchemaType(name = "date")
     @Column(name = "date_updated")
     private LocalDate dateUpdated;
     
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
     @XmlSchemaType(name = "date")
     @Column(name = "date_birthday")

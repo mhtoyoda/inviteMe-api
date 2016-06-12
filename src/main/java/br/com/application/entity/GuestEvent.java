@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -47,7 +46,6 @@ public class GuestEvent {
     @Column(name = "attendance_confirmed")
     private Boolean attendanceConfirmed;
 
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
     @XmlSchemaType(name = "dateTime")
     @Column(name = "time_sent_token")
@@ -56,7 +54,6 @@ public class GuestEvent {
     @Column(name = "token")
     private String token;
     
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
     @XmlSchemaType(name = "dateTime")
     @Column(name = "date_attendance_confirmed")

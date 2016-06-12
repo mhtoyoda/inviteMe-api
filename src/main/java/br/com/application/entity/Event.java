@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -82,19 +81,16 @@ public class Event {
 	@Column(name = "minimum_age")
 	private int minimumAge;
 
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateConverterXsd.class)
     @XmlSchemaType(name = "date")
 	@Column(name = "eventdate")
 	private LocalDate eventDate;
 
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
     @XmlSchemaType(name = "dateTime")
 	@Column(name = "event_init_hour")
 	private LocalDateTime eventInitHour;
 
-    @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
     @XmlSchemaType(name = "dateTime")
 	@Column(name = "event_end_hour")
@@ -111,7 +107,6 @@ public class Event {
 	@JoinColumn(name = "id_statustype")
 	private StatusType statusType;
 	
-	@XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(LocalDateTimeConverterXsd.class)
     @XmlSchemaType(name = "dateTime")
 	@Column(name = "date_updated")
