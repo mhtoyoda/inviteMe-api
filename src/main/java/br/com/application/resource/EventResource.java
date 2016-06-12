@@ -1,5 +1,6 @@
 package br.com.application.resource;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class EventResource {
 
         try {
             eventCreated = eventBusiness.save(event);
+            eventCreated.add(linkTo(methodOn(EventResource.class, findEventById(eventCreated.getEventId()))).withSelfRel());
             return new ResponseEntity<Event>(eventCreated, HttpStatus.OK);
         } catch (ErrorRepositoryException e) {
             logger.error("Erro Service: [AddressResource][createAddress]-> " + e.getMessage());

@@ -46,7 +46,7 @@ public class EventBusinessImpl implements EventBusiness {
 	@Override
 	public Event updateEvent(Event event) throws ErrorRepositoryException{
 		try{
-		    Event eventFind = findOne(event.getId());
+		    Event eventFind = findOne(event.getEventId());
 			if(null == eventFind){
 			   return null;	
 			}
@@ -59,7 +59,7 @@ public class EventBusinessImpl implements EventBusiness {
                             	            event.isCanSendInviteExternal(), event.isEventForFree());
 			
 			
-			eventUpdated.setId(event.getId());
+			eventUpdated.setEventId(event.getEventId());
 			return save(eventUpdated);
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
@@ -86,7 +86,7 @@ public class EventBusinessImpl implements EventBusiness {
 	public void delete(Event event) throws ErrorRepositoryException{
 	    Event eventDeleted;
         try {
-        	eventDeleted = findOne(event.getId());
+        	eventDeleted = findOne(event.getEventId());
             if(eventDeleted != null){
                 eventRepository.delete(eventDeleted);   
             }

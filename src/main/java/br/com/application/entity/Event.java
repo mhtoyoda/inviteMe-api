@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import br.com.application.converter.LocalDateConverterXsd;
 import br.com.application.converter.LocalDateTimeConverterXsd;
 
@@ -23,7 +25,7 @@ import br.com.application.converter.LocalDateTimeConverterXsd;
 @Table(name = "event")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event", propOrder = {
-        "id",
+        "eventId",
         "owner",
         "eventTypeAccess",
         "eventType",
@@ -42,11 +44,12 @@ import br.com.application.converter.LocalDateTimeConverterXsd;
         "statusType",
         "dateUpdated"
 }, namespace = "http://invviteme.com/domain")
-public class Event {
+public class Event extends ResourceSupport {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	@Column(name = "id")
+	private Integer eventId;
 
 	@ManyToOne
 	@JoinColumn(name = "id_owner")
@@ -145,15 +148,15 @@ public class Event {
 		this.addressEvent = addressEvent;
 		this.statusType = statusType;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
 	}
-
-	public Integer getId() {
-		return id;
+	
+	public Integer getEventId() {
+		return eventId;
 	}
-
+	
 	public Users getOwner() {
 		return owner;
 	}
@@ -266,7 +269,7 @@ public class Event {
 		result = prime * result
 				+ ((eventTypeAccess == null) ? 0 : eventTypeAccess.hashCode());
 		result = prime * result + (hiddenEvent ? 1231 : 1237);
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
 		result = prime * result
 				+ ((limitGuests == null) ? 0 : limitGuests.hashCode());
 		result = prime * result + minimumAge;
@@ -334,10 +337,10 @@ public class Event {
 			return false;
 		if (hiddenEvent != other.hiddenEvent)
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (eventId == null) {
+			if (other.eventId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!eventId.equals(other.eventId))
 			return false;
 		if (limitGuests == null) {
 			if (other.limitGuests != null)
@@ -371,7 +374,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", owner=" + owner + ", eventTypeAccess="
+		return "Event [eventId=" + eventId + ", owner=" + owner + ", eventTypeAccess="
 				+ eventTypeAccess + ", eventType=" + eventType + ", title="
 				+ title + ", description=" + description + ", observation="
 				+ observation + ", eventForFree=" + eventForFree
