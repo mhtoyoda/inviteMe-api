@@ -4,18 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import br.com.application.data.StatusData;
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "statustype")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StatusType", propOrder = {
         "id",
-        "description"
+        "description",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class StatusType {
 	
@@ -24,6 +27,9 @@ public class StatusType {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Transient
+    private Message message;
 	
 	/**
      * Default Constructor only use JacksonMapper

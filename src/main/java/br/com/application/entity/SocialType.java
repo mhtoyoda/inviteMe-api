@@ -5,16 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "socialtype")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SocialType", propOrder = {
         "id",
-        "name"
+        "name",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class SocialType {
 	
@@ -25,6 +29,9 @@ public class SocialType {
 	@Column(name = "name")
 	private String name;
 
+	@Transient
+    private Message message;
+	
 	/**
 	 * Default Constructor only use JacksonMapper
 	 */

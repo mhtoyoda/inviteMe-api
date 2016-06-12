@@ -7,11 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springframework.hateoas.ResourceSupport;
+
+import br.com.application.response.Message;
 
 @Entity
 @Table(name = "user_guest_unified")
@@ -20,7 +23,8 @@ import org.springframework.hateoas.ResourceSupport;
         "userGuestUnifiedId",
         "user",
         "event",
-        "amount"
+        "amount",
+        "message"
 }, namespace = "http://invviteme.com/domain")
 public class UserGuestUnified extends ResourceSupport {
 
@@ -40,6 +44,9 @@ public class UserGuestUnified extends ResourceSupport {
     @Column(name = "amount")
     private Integer amount;
 
+    @Transient
+    private Message message;
+    
     /**
 	 * Default Constructor only use JacksonMapper
 	 */
