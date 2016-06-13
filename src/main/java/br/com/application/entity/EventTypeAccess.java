@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.response.Message;
 
 @Entity
@@ -27,6 +29,7 @@ public class EventTypeAccess extends ResourceSupport {
 	@Id
     @GeneratedValue
     @Column(name = "id")
+	@JsonIgnore
 	private Integer eventTypeAccessId;
 	
 	@Column(name = "type_access")

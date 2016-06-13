@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.converter.LocalDateConverterXsd;
 import br.com.application.response.Message;
 
@@ -49,6 +51,7 @@ public class Users extends ResourceSupport implements Serializable {
 	@Id
     @GeneratedValue
     @Column(name = "id")
+	@JsonIgnore
     private Integer userId;
 
     @Column(name = "name")

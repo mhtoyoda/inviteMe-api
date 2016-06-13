@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.data.StatusData;
 import br.com.application.response.Message;
 
@@ -23,6 +25,7 @@ import br.com.application.response.Message;
 public class StatusType {
 	
 	@Id
+	@JsonIgnore
 	private Integer id;
 	
 	@Column(name = "description")

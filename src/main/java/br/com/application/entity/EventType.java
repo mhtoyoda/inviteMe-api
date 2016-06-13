@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.response.Message;
 
 @Entity
@@ -28,6 +30,7 @@ public class EventType {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "category")

@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.response.Message;
 
 @Entity
@@ -24,6 +26,7 @@ public class SocialType {
 	
 	@Id
     @GeneratedValue
+    @JsonIgnore
 	private Integer id;
 	
 	@Column(name = "name")

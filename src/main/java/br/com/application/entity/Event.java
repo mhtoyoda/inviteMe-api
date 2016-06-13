@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.application.converter.LocalDateConverterXsd;
 import br.com.application.converter.LocalDateTimeConverterXsd;
 import br.com.application.response.Message;
@@ -52,6 +54,7 @@ public class Event extends ResourceSupport {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
+	@JsonIgnore
 	private Integer eventId;
 
 	@ManyToOne
