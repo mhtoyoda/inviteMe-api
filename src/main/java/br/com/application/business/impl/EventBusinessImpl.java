@@ -10,6 +10,7 @@ import br.com.application.data.StatusData;
 import br.com.application.entity.Event;
 import br.com.application.entity.StatusType;
 import br.com.application.exception.ErrorRepositoryException;
+import br.com.application.indexer.Indexer;
 import br.com.application.repository.EventRepository;
 import br.com.application.repository.StatusTypeRepository;
 
@@ -23,11 +24,16 @@ public class EventBusinessImpl implements EventBusiness {
 
 	@Autowired
 	private StatusTypeRepository statusTypeRepository;
+
+	private Indexer<Event> indexer;
 	
 	@Override
 	public Event save(Event event) throws ErrorRepositoryException {
 		try{
-			return eventRepository.save(event);
+			event = eventRepository.save(event);
+			StringBuilder id = new StringBuilder(event.getEventId()).append("_").append(event.getTitle());
+			indexer.index("evento", id.toString(), event);
+			return event;
 		}catch(Exception e){
 			throw new ErrorRepositoryException(e.getMessage());
 		}	

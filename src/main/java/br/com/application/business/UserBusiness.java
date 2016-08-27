@@ -22,4 +22,6 @@ public interface UserBusiness {
 	Users inactiveUser(Users user) throws ErrorRepositoryException;
 
 	Users blockUser(Users user) throws ErrorRepositoryException;
+
+	boolean validateUser(Users users) throws ErrorRepositoryException;
 }

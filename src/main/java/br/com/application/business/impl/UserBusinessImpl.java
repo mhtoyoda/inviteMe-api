@@ -129,4 +129,17 @@ public class UserBusinessImpl implements UserBusiness {
 			throw new ErrorRepositoryException(e.getMessage());
 		}
 	}
+
+	@Override
+	public boolean validateUser(Users users) throws ErrorRepositoryException {
+		try{
+			Users userByEmailAndPassword = userRepository.findUserByEmailAndPassword(users.getEmail(), users.getPassword());
+			if( null != userByEmailAndPassword){
+				return userByEmailAndPassword.getStatusType().getDescription().equals("Ativo");
+			}			
+			return false;
+		}catch (Exception e) {
+			throw new ErrorRepositoryException(e.getMessage());
+		}
+	}
 }
